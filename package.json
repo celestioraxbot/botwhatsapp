@@ -1,0 +1,46 @@
+{
+  "name": "whatsapp-bot",
+  "version": "1.0.0",
+  "description": "Um bot para WhatsApp sem MongoDB.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "lint": "eslint . --fix"
+  },
+  "dependencies": {
+    "@deepgram/sdk": "^3.11.2",
+    "@google-cloud/vision": "^4.3.3",
+    "axios": "^1.8.1",
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "fs": "^0.0.1-security",
+    "node-schedule": "^2.1.1",
+    "os": "^0.1.2",
+    "pdf-parse": "^1.1.1",
+    "qrcode": "^1.5.4",
+    "sqlite3": "^5.1.7",
+    "whatsapp-web.js": "^1.26.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "nodemon": "^3.0.1"
+  },
+  "author": "Renovação Cósmica",
+  "license": "MIT",
+  "engines": {
+    "node": "20.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/celestioraxbot/bot.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/celestioraxbot/bot/issues"
+  },
+  "homepage": "https://github.com/celestioraxbot/bot#readme"
+}

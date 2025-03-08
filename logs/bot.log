@@ -1,0 +1,854 @@
+2025-03-03T16:04:38.163Z [info]: Início da aplicação
+2025-03-03T16:04:38.179Z [info]: Plugin carregado: announce
+2025-03-03T16:04:38.180Z [info]: Plugin carregado: ping
+2025-03-03T16:04:38.181Z [info]: Plugin carregado: poll
+2025-03-03T16:04:38.182Z [info]: Plugin carregado: userinfo
+2025-03-03T16:04:38.183Z [info]: Plugin carregado: weather
+2025-03-03T16:04:38.408Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T16:04:38.409Z [info]: Inicializando cliente WhatsApp
+2025-03-03T16:04:38.559Z [info]: Conectado ao banco SQLite.
+2025-03-03T16:04:38.648Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T16:04:47.872Z [info]: QR gerado com sucesso! Acesse /qr para escanear.
+2025-03-03T16:04:47.885Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T16:04:57.942Z [info]: Rota /qr acessada
+2025-03-03T16:05:08.401Z [warn]: Cliente não está pronto. Verificando estado...
+2025-03-03T16:05:08.402Z [info]: Tentativa 1 de reconexão em 10 segundos...
+2025-03-03T16:05:15.078Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-03T16:05:18.385Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T16:05:18.525Z [info]: Inicializando cliente WhatsApp
+2025-03-03T16:05:25.736Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T16:05:25.935Z [info]: Carregando WhatsApp: 95% - WhatsApp
+2025-03-03T16:05:26.533Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T16:05:27.656Z [info]: Bot conectado e pronto para uso.
+2025-03-03T16:05:46.553Z [info]: Início da aplicação
+2025-03-03T16:05:46.569Z [info]: Plugin carregado: announce
+2025-03-03T16:05:46.570Z [info]: Plugin carregado: ping
+2025-03-03T16:05:46.571Z [info]: Plugin carregado: poll
+2025-03-03T16:05:46.572Z [info]: Plugin carregado: userinfo
+2025-03-03T16:05:46.573Z [info]: Plugin carregado: weather
+2025-03-03T16:05:46.791Z [info]: Tentativa 1 de reconexão em 10 segundos...
+2025-03-03T16:05:46.800Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T16:05:46.800Z [info]: Inicializando cliente WhatsApp
+2025-03-03T16:05:46.898Z [info]: Conectado ao banco SQLite.
+2025-03-03T16:05:46.990Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T16:05:54.007Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T16:05:54.200Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-03T16:05:54.200Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-03T16:05:54.862Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T16:05:54.864Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T16:05:55.077Z [info]: Bot conectado e pronto para uso.
+2025-03-03T16:05:55.090Z [info]: Bot conectado e pronto para uso.
+2025-03-03T16:10:23.415Z [info]: Início da aplicação
+2025-03-03T16:10:23.431Z [info]: Plugin carregado: announce
+2025-03-03T16:10:23.432Z [info]: Plugin carregado: ping
+2025-03-03T16:10:23.433Z [info]: Plugin carregado: poll
+2025-03-03T16:10:23.434Z [info]: Plugin carregado: userinfo
+2025-03-03T16:10:23.435Z [info]: Plugin carregado: weather
+2025-03-03T16:10:23.660Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T16:10:23.660Z [info]: Inicializando cliente WhatsApp
+2025-03-03T16:10:23.758Z [info]: Conectado ao banco SQLite.
+2025-03-03T16:10:23.820Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T16:10:30.604Z [info]: QR gerado com sucesso! Acesse /qr para escanear.
+2025-03-03T16:10:30.619Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T16:10:48.607Z [info]: Rota /qr acessada
+2025-03-03T16:10:53.654Z [warn]: Cliente não está pronto. Verificando estado...
+2025-03-03T16:10:53.654Z [info]: Tentativa 1 de reconexão em 10 segundos...
+2025-03-03T16:11:03.975Z [info]: Inicializando cliente WhatsApp
+2025-03-03T16:11:10.884Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T16:11:12.138Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-03T16:11:15.541Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T16:11:16.706Z [info]: Bot conectado e pronto para uso.
+2025-03-03T16:21:23.320Z [warn]: Erro na detecção de idioma: Request failed with status code 503
+2025-03-03T16:21:40.492Z [warn]: Erro na análise de sentimento: Request failed with status code 503
+2025-03-03T16:32:01.145Z [info]: Início da aplicação
+2025-03-03T16:32:01.160Z [info]: Plugin carregado: announce
+2025-03-03T16:32:01.161Z [info]: Plugin carregado: ping
+2025-03-03T16:32:01.162Z [info]: Plugin carregado: poll
+2025-03-03T16:32:01.163Z [info]: Plugin carregado: userinfo
+2025-03-03T16:32:01.164Z [info]: Plugin carregado: weather
+2025-03-03T16:32:01.390Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T16:32:01.390Z [info]: Inicializando cliente WhatsApp
+2025-03-03T16:32:01.491Z [info]: Conectado ao banco SQLite.
+2025-03-03T16:32:01.502Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T16:32:11.035Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T16:32:11.498Z [info]: Carregando WhatsApp: 95% - WhatsApp
+2025-03-03T16:32:12.489Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T16:32:12.594Z [info]: Bot conectado e pronto para uso.
+2025-03-03T16:32:14.574Z [info]: Carregando WhatsApp: 99% - WhatsApp
+2025-03-03T16:32:27.284Z [warn]: Tentativa 1/5 falhou para analyzeSentiment: Request failed with status code 503
+2025-03-03T16:32:28.720Z [warn]: Tentativa 2/5 falhou para analyzeSentiment: Request failed with status code 503
+2025-03-03T16:32:31.331Z [warn]: Tentativa 3/5 falhou para analyzeSentiment: Request failed with status code 503
+2025-03-03T16:33:25.903Z [warn]: Tentativa 1/5 falhou para detectLanguage: Request failed with status code 503
+2025-03-03T16:33:27.292Z [warn]: Tentativa 2/5 falhou para detectLanguage: Request failed with status code 503
+2025-03-03T16:33:29.487Z [warn]: Tentativa 1/5 falhou para detectLanguage: Request failed with status code 503
+2025-03-03T16:33:29.582Z [warn]: Tentativa 3/5 falhou para detectLanguage: Request failed with status code 503
+2025-03-03T16:33:31.019Z [warn]: Tentativa 2/5 falhou para detectLanguage: Request failed with status code 503
+2025-03-03T16:33:33.488Z [warn]: Tentativa 3/5 falhou para detectLanguage: Request failed with status code 503
+2025-03-03T16:33:33.859Z [warn]: Tentativa 4/5 falhou para detectLanguage: Request failed with status code 503
+2025-03-03T16:33:43.430Z [warn]: Tentativa 4/5 falhou para detectLanguage: Request failed with status code 503
+2025-03-03T16:38:08.687Z [info]: Início da aplicação
+2025-03-03T16:38:08.702Z [info]: Plugin carregado: announce
+2025-03-03T16:38:08.703Z [info]: Plugin carregado: ping
+2025-03-03T16:38:08.704Z [info]: Plugin carregado: poll
+2025-03-03T16:38:08.705Z [info]: Plugin carregado: userinfo
+2025-03-03T16:38:08.756Z [info]: Plugin carregado: weather
+2025-03-03T16:38:08.979Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T16:38:08.980Z [info]: Inicializando cliente WhatsApp
+2025-03-03T16:38:09.072Z [info]: Conectado ao banco SQLite.
+2025-03-03T16:38:09.138Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T16:38:16.486Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T16:38:17.100Z [info]: Carregando WhatsApp: 95% - WhatsApp
+2025-03-03T16:38:18.020Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T16:38:18.141Z [info]: Bot conectado e pronto para uso.
+2025-03-03T16:38:19.229Z [info]: Carregando WhatsApp: 97% - WhatsApp
+2025-03-03T16:38:19.305Z [info]: Carregando WhatsApp: 99% - WhatsApp
+2025-03-03T16:45:11.150Z [info]: Início da aplicação
+2025-03-03T16:45:11.165Z [info]: Plugin carregado: announce
+2025-03-03T16:45:11.166Z [info]: Plugin carregado: ping
+2025-03-03T16:45:11.167Z [info]: Plugin carregado: poll
+2025-03-03T16:45:11.168Z [info]: Plugin carregado: userinfo
+2025-03-03T16:45:11.219Z [info]: Plugin carregado: weather
+2025-03-03T16:45:11.443Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T16:45:11.444Z [info]: Inicializando cliente WhatsApp
+2025-03-03T16:45:11.543Z [info]: Conectado ao banco SQLite.
+2025-03-03T16:45:11.550Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T16:45:19.029Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T16:45:19.448Z [info]: Carregando WhatsApp: 95% - WhatsApp
+2025-03-03T16:45:20.400Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T16:45:20.531Z [info]: Bot conectado e pronto para uso.
+2025-03-03T16:45:22.027Z [info]: Carregando WhatsApp: 99% - WhatsApp
+2025-03-03T16:49:46.442Z [info]: Início da aplicação
+2025-03-03T16:49:46.458Z [info]: Plugin carregado: announce
+2025-03-03T16:49:46.459Z [info]: Plugin carregado: ping
+2025-03-03T16:49:46.460Z [info]: Plugin carregado: poll
+2025-03-03T16:49:46.461Z [info]: Plugin carregado: userinfo
+2025-03-03T16:49:46.515Z [info]: Plugin carregado: weather
+2025-03-03T16:49:46.742Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T16:49:46.742Z [info]: Inicializando cliente WhatsApp
+2025-03-03T16:49:46.835Z [info]: Conectado ao banco SQLite.
+2025-03-03T16:49:46.896Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T16:49:54.286Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T16:49:54.713Z [info]: Carregando WhatsApp: 95% - WhatsApp
+2025-03-03T16:49:55.637Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T16:49:55.757Z [info]: Bot conectado e pronto para uso.
+2025-03-03T16:49:57.269Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T16:54:55.527Z [info]: Início da aplicação
+2025-03-03T16:54:55.543Z [info]: Plugin carregado: announce
+2025-03-03T16:54:55.543Z [info]: Plugin carregado: ping
+2025-03-03T16:54:55.544Z [info]: Plugin carregado: poll
+2025-03-03T16:54:55.545Z [info]: Plugin carregado: userinfo
+2025-03-03T16:54:55.597Z [info]: Plugin carregado: weather
+2025-03-03T16:54:55.823Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T16:54:55.824Z [info]: Inicializando cliente WhatsApp
+2025-03-03T16:54:55.914Z [info]: Conectado ao banco SQLite.
+2025-03-03T16:54:55.984Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T16:55:02.904Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T16:55:03.314Z [info]: Carregando WhatsApp: 95% - WhatsApp
+2025-03-03T16:55:04.280Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T16:55:04.410Z [info]: Bot conectado e pronto para uso.
+2025-03-03T16:55:06.158Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T16:55:07.148Z [info]: Chats sincronizados com sucesso.
+2025-03-03T16:55:15.929Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T16:55:22.673Z [info]: Mensagem recebida de 554797377750@c.us: tudo bem?
+2025-03-03T17:01:09.232Z [info]: Início da aplicação
+2025-03-03T17:01:09.248Z [info]: Plugin carregado: announce
+2025-03-03T17:01:09.249Z [info]: Plugin carregado: ping
+2025-03-03T17:01:09.250Z [info]: Plugin carregado: poll
+2025-03-03T17:01:09.251Z [info]: Plugin carregado: userinfo
+2025-03-03T17:01:09.307Z [info]: Plugin carregado: weather
+2025-03-03T17:01:09.533Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T17:01:09.534Z [info]: Inicializando cliente WhatsApp
+2025-03-03T17:01:09.628Z [info]: Conectado ao banco SQLite.
+2025-03-03T17:01:09.697Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T17:01:16.923Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T17:01:17.383Z [info]: Carregando WhatsApp: 95% - WhatsApp
+2025-03-03T17:01:18.303Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T17:01:18.426Z [info]: Bot conectado e pronto para uso.
+2025-03-03T17:01:18.495Z [info]: Chats sincronizados com sucesso.
+2025-03-03T17:01:21.422Z [warn]: Evento loading_screen (97% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T17:01:22.257Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T17:01:28.778Z [info]: Mensagem recebida de 554797377750@c.us: Olá
+2025-03-03T17:01:55.979Z [info]: Mensagem recebida de 554797377750@c.us: !status
+2025-03-03T17:06:09.724Z [info]: Início da aplicação
+2025-03-03T17:06:09.732Z [info]: Plugin carregado: announce
+2025-03-03T17:06:09.733Z [info]: Plugin carregado: ping
+2025-03-03T17:06:09.734Z [info]: Plugin carregado: poll
+2025-03-03T17:06:09.735Z [info]: Plugin carregado: userinfo
+2025-03-03T17:06:09.792Z [info]: Plugin carregado: weather
+2025-03-03T17:06:10.046Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T17:06:10.047Z [info]: Inicializando cliente WhatsApp
+2025-03-03T17:06:10.149Z [info]: Conectado ao banco SQLite.
+2025-03-03T17:06:10.231Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T17:06:17.978Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T17:06:18.560Z [info]: Carregando WhatsApp: 95% - WhatsApp
+2025-03-03T17:06:19.818Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T17:06:19.936Z [info]: Bot conectado e pronto para uso.
+2025-03-03T17:06:20.007Z [info]: Chats sincronizados com sucesso.
+2025-03-03T17:06:23.280Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T17:07:09.035Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T17:16:55.259Z [info]: Início da aplicação
+2025-03-03T17:16:55.267Z [info]: Plugin carregado: announce
+2025-03-03T17:16:55.268Z [info]: Plugin carregado: ping
+2025-03-03T17:16:55.269Z [info]: Plugin carregado: poll
+2025-03-03T17:16:55.270Z [info]: Plugin carregado: userinfo
+2025-03-03T17:16:55.321Z [info]: Plugin carregado: weather
+2025-03-03T17:16:55.545Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T17:16:55.545Z [info]: Inicializando cliente WhatsApp
+2025-03-03T17:16:55.643Z [info]: Conectado ao banco SQLite.
+2025-03-03T17:16:55.709Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T17:17:02.939Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T17:17:03.382Z [info]: Carregando WhatsApp: 95% - WhatsApp
+2025-03-03T17:17:04.356Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T17:17:04.475Z [info]: Bot conectado e pronto para uso.
+2025-03-03T17:17:07.753Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T17:17:07.818Z [info]: Chats sincronizados com sucesso.
+2025-03-03T17:17:33.975Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T17:17:33.978Z [error]: Erro ao processar mensagem de 554797377750@c.us: Cannot read properties of undefined (reading 'length')
+2025-03-03T17:22:09.947Z [info]: Início da aplicação
+2025-03-03T17:22:09.955Z [info]: Plugin carregado: announce
+2025-03-03T17:22:09.956Z [info]: Plugin carregado: ping
+2025-03-03T17:22:09.957Z [info]: Plugin carregado: poll
+2025-03-03T17:22:09.958Z [info]: Plugin carregado: userinfo
+2025-03-03T17:22:10.011Z [info]: Plugin carregado: weather
+2025-03-03T17:22:10.237Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T17:22:10.237Z [info]: Inicializando cliente WhatsApp
+2025-03-03T17:22:10.336Z [info]: Conectado ao banco SQLite.
+2025-03-03T17:22:10.340Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T17:22:17.646Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T17:22:18.203Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-03T17:22:19.183Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T17:22:19.448Z [info]: Bot conectado e pronto para uso.
+2025-03-03T17:22:20.558Z [info]: Chats sincronizados com sucesso.
+2025-03-03T17:22:38.996Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T17:23:24.936Z [info]: Mensagem recebida de 554797377750@c.us: estou bem, como está sendo sua tarde?
+2025-03-03T17:33:40.000Z [info]: Início da aplicação
+2025-03-03T17:33:40.011Z [info]: Plugin carregado: announce
+2025-03-03T17:33:40.012Z [info]: Plugin carregado: ping
+2025-03-03T17:33:40.013Z [info]: Plugin carregado: poll
+2025-03-03T17:33:40.015Z [info]: Plugin carregado: userinfo
+2025-03-03T17:33:40.075Z [info]: Plugin carregado: weather
+2025-03-03T17:33:40.316Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T17:33:40.317Z [info]: Inicializando cliente WhatsApp
+2025-03-03T17:33:40.413Z [info]: Conectado ao banco SQLite.
+2025-03-03T17:33:40.475Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T17:33:50.017Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T17:33:50.139Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-03T17:33:51.339Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T17:33:52.571Z [info]: Bot conectado e pronto para uso.
+2025-03-03T17:33:52.639Z [info]: Chats sincronizados com sucesso.
+2025-03-03T17:37:31.472Z [info]: Mensagem recebida de 120363296456201791@g.us: Eu tenho cliente que promove show de uma banda uns 18 a 20   dias de anúncio ai
+2025-03-03T17:37:32.019Z [error]: Erro na análise de imagem com Google Vision: Could not load the default credentials. Browse to https://cloud.google.com/docs/authentication/getting-started for more information.
+2025-03-03T17:38:54.702Z [info]: Mensagem recebida de 120363296456201791@g.us: Já fui no show dessa banda kk
+2025-03-03T17:42:00.328Z [info]: Mensagem recebida de 120363296456201791@g.us: Vou puxar nessa onda de whats mesmo, talvez seja um bom caminhon
+2025-03-03T17:43:28.725Z [info]: Mensagem recebida de 120363296456201791@g.us: Preciso de 10 mil para rodar ads
+2025-03-03T17:43:52.436Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T17:43:52.437Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T17:43:52.721Z [info]: Bot conectado e pronto para uso.
+2025-03-03T17:43:52.774Z [info]: Bot conectado e pronto para uso.
+2025-03-03T17:50:15.134Z [info]: Início da aplicação
+2025-03-03T17:50:15.143Z [info]: Plugin carregado: announce
+2025-03-03T17:50:15.145Z [info]: Plugin carregado: ping
+2025-03-03T17:50:15.146Z [info]: Plugin carregado: poll
+2025-03-03T17:50:15.148Z [info]: Plugin carregado: userinfo
+2025-03-03T17:50:15.210Z [info]: Plugin carregado: weather
+2025-03-03T17:50:15.434Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T17:50:15.435Z [info]: Inicializando cliente WhatsApp
+2025-03-03T17:50:15.538Z [info]: Conectado ao banco SQLite.
+2025-03-03T17:50:15.542Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T17:50:25.628Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T17:50:31.056Z [warn]: Cliente desconectado: LOGOUT
+2025-03-03T17:50:31.058Z [info]: Tentativa 1 de reconexão em 10 segundos...
+2025-03-03T17:50:56.581Z [info]: Início da aplicação
+2025-03-03T17:50:56.589Z [info]: Plugin carregado: announce
+2025-03-03T17:50:56.590Z [info]: Plugin carregado: ping
+2025-03-03T17:50:56.592Z [info]: Plugin carregado: poll
+2025-03-03T17:50:56.593Z [info]: Plugin carregado: userinfo
+2025-03-03T17:50:56.662Z [info]: Plugin carregado: weather
+2025-03-03T17:50:56.891Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T17:50:56.892Z [info]: Inicializando cliente WhatsApp
+2025-03-03T17:50:56.992Z [info]: Conectado ao banco SQLite.
+2025-03-03T17:50:57.060Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T17:51:03.891Z [info]: QR gerado com sucesso! Acesse /qr para escanear.
+2025-03-03T17:51:03.908Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T17:51:26.905Z [warn]: Cliente não está pronto. Verificando estado...
+2025-03-03T17:51:26.906Z [info]: Tentativa 1 de reconexão em 10 segundos...
+2025-03-03T17:51:34.994Z [info]: Rota /qr acessada
+2025-03-03T17:51:36.996Z [info]: Inicializando cliente WhatsApp
+2025-03-03T17:51:44.674Z [info]: QR gerado com sucesso! Acesse /qr para escanear.
+2025-03-03T17:51:44.686Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T17:51:51.998Z [info]: Rota /qr acessada
+2025-03-03T17:51:56.915Z [warn]: Cliente não está pronto. Verificando estado...
+2025-03-03T17:51:56.915Z [info]: Tentativa 1 de reconexão em 10 segundos...
+2025-03-03T17:52:03.330Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-03T17:52:05.875Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T17:52:07.058Z [info]: Inicializando cliente WhatsApp
+2025-03-03T17:52:14.425Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T17:52:14.890Z [info]: Carregando WhatsApp: 95% - WhatsApp
+2025-03-03T17:52:15.459Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T17:52:15.623Z [info]: Bot conectado e pronto para uso.
+2025-03-03T17:52:15.846Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T17:52:21.097Z [info]: Chats sincronizados com sucesso.
+2025-03-03T17:53:46.018Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T17:53:56.207Z [info]: Mensagem recebida de 554797377750@c.us: o que você pode fazer?
+2025-03-03T18:01:46.591Z [info]: Início da aplicação
+2025-03-03T18:01:46.599Z [info]: Plugin carregado: announce
+2025-03-03T18:01:46.600Z [info]: Plugin carregado: ping
+2025-03-03T18:01:46.601Z [info]: Plugin carregado: poll
+2025-03-03T18:01:46.603Z [info]: Plugin carregado: userinfo
+2025-03-03T18:01:46.656Z [info]: Plugin carregado: weather
+2025-03-03T18:01:46.882Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T18:01:46.883Z [info]: Inicializando cliente WhatsApp
+2025-03-03T18:01:46.980Z [info]: Conectado ao banco SQLite.
+2025-03-03T18:01:47.038Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T18:01:56.908Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T18:01:57.389Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-03T18:01:58.186Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T18:01:58.310Z [info]: Bot conectado e pronto para uso.
+2025-03-03T18:01:58.386Z [info]: Chats sincronizados com sucesso.
+2025-03-03T18:02:00.099Z [info]: Mensagem recebida de 120363296456201791@g.us: E esse anúncio aqui? kkkkkkk
+2025-03-03T18:02:00.293Z [info]: Mensagem recebida de 120363296456201791@g.us: Se loko kkkkkkk
+2025-03-03T18:02:00.649Z [warn]: Evento loading_screen (10% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T18:02:01.435Z [info]: Mensagem recebida de 120363296456201791@g.us: Clica em pedir mais informações kkk
+2025-03-03T18:02:01.478Z [info]: Mensagem recebida de 120363296456201791@g.us: Se tá rodando tá convertendo mkkkkkk
+2025-03-03T18:02:01.529Z [info]: Mensagem recebida de 120363296456201791@g.us: Eu to ferrado nesse eventos
+2025-03-03T18:02:01.576Z [info]: Mensagem recebida de 120363296456201791@g.us: kkkkkkk
+2025-03-03T18:02:01.619Z [info]: Mensagem recebida de 120363296456201791@g.us: Né kkkkk
+2025-03-03T18:02:01.653Z [warn]: Evento loading_screen (34% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T18:02:01.675Z [info]: Mensagem recebida de 120363296456201791@g.us: Soltaram o ferrugem uns dias antes
+2025-03-03T18:02:01.718Z [info]: Mensagem recebida de 120363296456201791@g.us: Ai me fudeu inteiro
+2025-03-03T18:02:01.756Z [info]: Mensagem recebida de 120363296456201791@g.us: Aí vc fala preço ele acha caro e diz eu mesmo faço 😎
+2025-03-03T18:02:01.798Z [info]: Mensagem recebida de 120363296456201791@g.us: Mano chatgpt ver ideias de segmentações
+2025-03-03T18:02:01.863Z [info]: Mensagem recebida de 120363296456201791@g.us: Aproveita e faça uma proposta de gestão de tráfego para a agencia😅
+2025-03-03T18:02:01.902Z [info]: Mensagem recebida de 120363296456201791@g.us: Aí é foda kk
+2025-03-03T18:02:01.957Z [info]: Mensagem recebida de 120363296456201791@g.us: Boa
+2025-03-03T18:02:01.995Z [info]: Mensagem recebida de 120363296456201791@g.us: kkkkk
+2025-03-03T18:02:02.035Z [info]: Mensagem recebida de 120363296456201791@g.us: Até pensei mas ultimamente to focando mais em automações do que gestão de tráfego
+2025-03-03T18:02:02.072Z [info]: Mensagem recebida de 120363296456201791@g.us: Manda o @ do instagram
+2025-03-03T18:02:02.110Z [info]: Mensagem recebida de 120363296456201791@g.us: Dela
+2025-03-03T18:02:02.151Z [info]: Mensagem recebida de 120363296456201791@g.us: Quando chega anúncio de restaurante de outra cidade eu mando msg dando uma dica de melhoria e vai indo
+2025-03-03T18:02:02.188Z [info]: Mensagem recebida de 120363296456201791@g.us: Eu faço gestão de tráfego e de delivery (no Ifood)
+2025-03-03T18:02:02.662Z [warn]: Evento loading_screen (95% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T18:02:04.365Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T18:02:11.273Z [info]: Mensagem recebida de 120363296456201791@g.us: 😄😄
+2025-03-03T18:02:30.593Z [info]: Mensagem recebida de 120363296456201791@g.us: Boa
+2025-03-03T18:02:51.836Z [info]: Mensagem recebida de 120363296456201791@g.us: MN como que, da umas dicas ai, eu peguei um hamburgueria
+2025-03-03T18:03:25.622Z [info]: Mensagem recebida de 120363296456201791@g.us: Comecei essa semana o dono de um restaurante me indicou pra um tio q é dono de três padarias em feira de Santana
+2025-03-03T18:03:26.303Z [info]: Mensagem recebida de 120363296456201791@g.us: mas nunca nem rodei nada pro ifood
+2025-03-03T18:03:54.230Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T18:03:58.507Z [info]: Mensagem recebida de 554797377750@c.us: estou bem
+2025-03-03T18:04:04.176Z [info]: Mensagem recebida de 554797377750@c.us: o que você faz?
+2025-03-03T18:04:51.810Z [info]: Mensagem recebida de 120363296456201791@g.us: 
+2025-03-03T18:05:29.728Z [info]: Mensagem recebida de 120363296456201791@g.us: 
+2025-03-03T18:05:56.704Z [info]: Mensagem recebida de 120363296456201791@g.us: 
+2025-03-03T18:06:26.827Z [info]: Mensagem recebida de 120363296456201791@g.us: Ai sim kkk boaa
+2025-03-03T18:08:19.856Z [info]: Mensagem recebida de 120363296456201791@g.us: o bagulho e campanha de conversão, separa uns 4 publicos e faz uns 10 criativo pra testar,
+2025-03-03T18:08:38.659Z [info]: Mensagem recebida de 120363296456201791@g.us: pegar uns pratos top e girar eles
+2025-03-03T18:09:46.863Z [info]: Mensagem recebida de 120363296456201791@g.us: Boa tarde pessoal!
+2025-03-03T18:09:52.694Z [info]: Mensagem recebida de 120363296456201791@g.us: 
+2025-03-03T18:33:49.139Z [info]: Início da aplicação
+2025-03-03T18:33:49.403Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T18:33:49.404Z [info]: Inicializando cliente WhatsApp
+2025-03-03T18:33:49.507Z [info]: Plugin carregado: announce
+2025-03-03T18:33:49.510Z [info]: Plugin carregado: ping
+2025-03-03T18:33:49.511Z [info]: Plugin carregado: poll
+2025-03-03T18:33:49.512Z [info]: Plugin carregado: userinfo
+2025-03-03T18:33:49.513Z [info]: Plugin carregado: weather
+2025-03-03T18:33:49.514Z [info]: Conectado ao banco SQLite.
+2025-03-03T18:33:49.574Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T18:33:59.474Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T18:34:00.124Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-03T18:34:01.650Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T18:34:01.783Z [info]: Bot conectado e pronto para uso.
+2025-03-03T18:34:04.350Z [info]: Chats sincronizados com sucesso.
+2025-03-03T18:34:04.387Z [warn]: Evento loading_screen (8% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T18:34:05.106Z [info]: Mensagem recebida de 120363296456201791@g.us: Quando vocês criaram a conta de anúncios de vocês? Criaram direto no navegador, qualquer um? Tem algum vídeo do kevones no yt que ensina criando do zero pra não ser bloqueado de cara?
+2025-03-03T18:34:05.169Z [info]: Mensagem recebida de 120363296456201791@g.us: Fiquei off um tempo
+2025-03-03T18:34:05.243Z [info]: Mensagem recebida de 120363296456201791@g.us: kkkkk normal kkkk no inicio é assim
+2025-03-03T18:34:05.308Z [info]: Mensagem recebida de 120363296456201791@g.us: Depois disso só fazer o tráfego normalmente
+2025-03-03T18:34:05.364Z [info]: Mensagem recebida de 120363296456201791@g.us: 
+2025-03-03T18:34:05.411Z [warn]: Evento loading_screen (29% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T18:34:05.528Z [info]: Mensagem recebida de 120363296456201791@g.us: Nunca aceitam kkkk na maioria das vezes
+2025-03-03T18:34:05.608Z [info]: Mensagem recebida de 120363296456201791@g.us: essas foto ta convertendo ?
+2025-03-03T18:34:05.703Z [info]: Mensagem recebida de 120363296456201791@g.us: se nao me engano na seleta tem uma aula sobre esse assunto
+2025-03-03T18:34:05.807Z [info]: Mensagem recebida de 120363296456201791@g.us: A parte ruim é que não sou da seleta kkk mas vlw
+2025-03-03T18:34:05.875Z [info]: Mensagem recebida de 120363296456201791@g.us: a fudeo kkkkkkk
+2025-03-03T18:34:05.930Z [info]: Mensagem recebida de 120363296456201791@g.us: Rapaz até q tá mais já cobrei fotos novas
+2025-03-03T18:34:05.985Z [info]: Mensagem recebida de 120363296456201791@g.us: Tem fotos q são de combo e não tem tipo a coca ou café na imagem
+2025-03-03T18:34:06.038Z [info]: Mensagem recebida de 120363296456201791@g.us: era bom fazer umas novas
+2025-03-03T18:34:06.152Z [info]: Mensagem recebida de 120363296456201791@g.us: ou pega do pinterest kkkkkk
+2025-03-03T18:34:06.418Z [warn]: Evento loading_screen (95% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T18:34:08.737Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T18:34:41.231Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T18:34:41.603Z [error]: Erro ao chamar Hugging Face API: Request failed with status code 404
+2025-03-03T18:38:16.273Z [info]: Mensagem recebida de 120363296456201791@g.us: 
+2025-03-03T18:38:18.150Z [info]: Mensagem recebida de 120363296456201791@g.us: 
+2025-03-03T18:38:39.122Z [info]: Mensagem recebida de 120363296456201791@g.us: 
+2025-03-03T18:39:15.389Z [info]: Início da aplicação
+2025-03-03T18:39:15.622Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T18:39:15.623Z [info]: Inicializando cliente WhatsApp
+2025-03-03T18:39:15.721Z [info]: Plugin carregado: announce
+2025-03-03T18:39:15.722Z [info]: Plugin carregado: ping
+2025-03-03T18:39:15.724Z [info]: Plugin carregado: poll
+2025-03-03T18:39:15.725Z [info]: Plugin carregado: userinfo
+2025-03-03T18:39:15.726Z [info]: Plugin carregado: weather
+2025-03-03T18:39:15.726Z [info]: Conectado ao banco SQLite.
+2025-03-03T18:39:15.801Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T18:39:23.457Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T18:39:24.064Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-03T18:39:24.942Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T18:39:25.212Z [info]: Bot conectado e pronto para uso.
+2025-03-03T18:39:25.280Z [info]: Chats sincronizados com sucesso.
+2025-03-03T18:39:32.343Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T18:39:48.203Z [info]: Mensagem recebida de 554797377750@c.us: tudo bem?
+2025-03-03T18:47:23.657Z [info]: Início da aplicação
+2025-03-03T18:47:23.911Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T18:47:23.912Z [info]: Inicializando cliente WhatsApp
+2025-03-03T18:47:24.014Z [info]: Plugin carregado: announce
+2025-03-03T18:47:24.016Z [info]: Plugin carregado: ping
+2025-03-03T18:47:24.017Z [info]: Plugin carregado: poll
+2025-03-03T18:47:24.018Z [info]: Plugin carregado: userinfo
+2025-03-03T18:47:24.019Z [info]: Plugin carregado: weather
+2025-03-03T18:47:24.019Z [info]: Conectado ao banco SQLite.
+2025-03-03T18:47:24.093Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T18:47:34.661Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T18:47:34.850Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-03T18:47:35.910Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T18:47:36.201Z [info]: Bot conectado e pronto para uso.
+2025-03-03T18:47:36.280Z [info]: Chats sincronizados com sucesso.
+2025-03-03T18:48:16.281Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T18:48:16.905Z [error]: Erro ao chamar deepseek API: Request failed with status code 401, Status: 401
+2025-03-03T19:17:27.860Z [info]: Início da aplicação
+2025-03-03T19:17:28.129Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T19:17:28.130Z [info]: Inicializando cliente WhatsApp
+2025-03-03T19:17:28.201Z [info]: Recuperação de vendas agendada para a cada 3 horas.
+2025-03-03T19:17:28.251Z [info]: Plugin carregado: announce
+2025-03-03T19:17:28.252Z [info]: Plugin carregado: ping
+2025-03-03T19:17:28.254Z [info]: Plugin carregado: poll
+2025-03-03T19:17:28.255Z [info]: Plugin carregado: userinfo
+2025-03-03T19:17:28.256Z [info]: Plugin carregado: weather
+2025-03-03T19:17:28.257Z [info]: Conectado ao banco SQLite.
+2025-03-03T19:17:28.374Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T19:17:38.622Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T19:17:38.898Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-03T19:17:40.011Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T19:17:41.390Z [info]: Carregando WhatsApp: 40% - WhatsApp
+2025-03-03T19:17:42.047Z [info]: Bot conectado e pronto para uso.
+2025-03-03T19:17:43.121Z [info]: Chats sincronizados com sucesso.
+2025-03-03T19:17:43.258Z [info]: Mensagem recebida de 120363296456201791@g.us: 
+2025-03-03T19:17:43.359Z [info]: Mensagem recebida de 120363391576664833@g.us: +124 conta do pai
+2025-03-03T19:17:43.402Z [warn]: Evento loading_screen (80% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T19:17:43.492Z [info]: Mensagem recebida de 120363296456201791@g.us: Quando o CTR TODOS esta 0,51% o q esta errado?
+2025-03-03T19:17:44.407Z [warn]: Evento loading_screen (95% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T19:17:47.682Z [warn]: Evento loading_screen (97% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T19:17:47.852Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T19:18:15.706Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T19:18:16.179Z [warn]: Falha ao usar o modelo Qwen/Qwen2-7B-Instruct: Request failed with status code 403, Status: 403. Tentando próximo modelo...
+2025-03-03T19:18:16.476Z [warn]: Falha ao usar o modelo NousResearch/Llama-2-7b-chat-hf: Request failed with status code 403, Status: 403. Tentando próximo modelo...
+2025-03-03T19:18:21.440Z [info]: Resposta gerada com sucesso usando o modelo tiiuae/falcon-7b-instruct
+2025-03-03T19:29:04.586Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T19:29:05.066Z [warn]: Falha ao usar o modelo Qwen/Qwen2-7B-Instruct: Request failed with status code 403, Status: 403. Tentando próximo modelo...
+2025-03-03T19:29:05.440Z [warn]: Falha ao usar o modelo NousResearch/Llama-2-7b-chat-hf: Request failed with status code 403, Status: 403. Tentando próximo modelo...
+2025-03-03T19:29:10.681Z [info]: Resposta gerada com sucesso usando o modelo tiiuae/falcon-7b-instruct
+2025-03-03T19:29:46.233Z [info]: Mensagem recebida de 120363296456201791@g.us: criativo
+2025-03-03T19:31:08.174Z [info]: Mensagem recebida de 120363296456201791@g.us: Galera que anuncia pra e-commerce , vocês anunciam para Home do site ou somente para página de um produto ?
+2025-03-03T19:33:09.649Z [info]: Início da aplicação
+2025-03-03T19:33:09.953Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T19:33:09.954Z [info]: Inicializando cliente WhatsApp
+2025-03-03T19:33:10.011Z [info]: Recuperação de vendas agendada para a cada 3 horas.
+2025-03-03T19:33:10.077Z [info]: Plugin carregado: announce
+2025-03-03T19:33:10.078Z [info]: Plugin carregado: ping
+2025-03-03T19:33:10.080Z [info]: Plugin carregado: poll
+2025-03-03T19:33:10.080Z [info]: Plugin carregado: userinfo
+2025-03-03T19:33:10.082Z [info]: Plugin carregado: weather
+2025-03-03T19:33:10.082Z [info]: Conectado ao banco SQLite.
+2025-03-03T19:33:10.182Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T19:33:23.000Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T19:33:23.653Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-03T19:33:28.443Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T19:33:30.069Z [info]: Bot conectado e pronto para uso.
+2025-03-03T19:33:30.114Z [info]: Mensagem recebida de 120363296456201791@g.us: se for vendas em geral, sem especificar o produto, pra pagina inicial
+2025-03-03T19:33:30.328Z [info]: Chats sincronizados com sucesso.
+2025-03-03T19:33:30.645Z [warn]: Evento loading_screen (95% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T19:33:34.438Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T19:34:01.093Z [info]: Mensagem recebida de 554797377750@c.us: oi
+2025-03-03T19:34:01.546Z [warn]: Falha ao usar o modelo google/flan-t5-base: Request failed with status code 400, Status: 400. Tentando próximo modelo...
+2025-03-03T19:34:01.829Z [warn]: Falha ao usar o modelo facebook/blenderbot-400M-distill: Request failed with status code 400, Status: 400. Tentando próximo modelo...
+2025-03-03T19:34:01.843Z [error]: Todos os modelos falharam. Usando resposta padrão.
+2025-03-03T19:39:43.485Z [info]: Início da aplicação
+2025-03-03T19:39:43.723Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T19:39:43.724Z [info]: Inicializando cliente WhatsApp
+2025-03-03T19:39:43.778Z [info]: Recuperação de vendas agendada para a cada 3 horas.
+2025-03-03T19:39:43.832Z [info]: Plugin carregado: announce
+2025-03-03T19:39:43.833Z [info]: Plugin carregado: ping
+2025-03-03T19:39:43.834Z [info]: Plugin carregado: poll
+2025-03-03T19:39:43.835Z [info]: Plugin carregado: userinfo
+2025-03-03T19:39:43.836Z [info]: Plugin carregado: weather
+2025-03-03T19:39:43.837Z [info]: Conectado ao banco SQLite.
+2025-03-03T19:39:43.915Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T19:39:54.316Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T19:39:54.504Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-03T19:39:56.756Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T19:39:58.431Z [info]: Bot conectado e pronto para uso.
+2025-03-03T19:39:58.522Z [info]: Chats sincronizados com sucesso.
+2025-03-03T19:41:21.783Z [info]: Mensagem recebida de 554797377750@c.us: oi
+2025-03-03T19:41:22.149Z [warn]: Falha ao usar o modelo google/flan-t5-base: Request failed with status code 400, Status: 400. Tentando próximo modelo...
+2025-03-03T19:41:22.374Z [warn]: Falha ao usar o modelo facebook/blenderbot-400M-distill: Request failed with status code 400, Status: 400. Tentando próximo modelo...
+2025-03-03T19:41:22.376Z [error]: Todos os modelos falharam. Usando resposta padrão.
+2025-03-03T19:42:02.588Z [info]: Mensagem recebida de 554797377750@c.us: o que você faz?
+2025-03-03T19:42:02.815Z [warn]: Falha ao usar o modelo google/flan-t5-base: Request failed with status code 400, Status: 400. Tentando próximo modelo...
+2025-03-03T19:42:03.001Z [warn]: Falha ao usar o modelo facebook/blenderbot-400M-distill: Request failed with status code 400, Status: 400. Tentando próximo modelo...
+2025-03-03T19:42:03.002Z [error]: Todos os modelos falharam. Usando resposta padrão.
+2025-03-03T19:44:25.233Z [info]: Mensagem recebida de 120363296456201791@g.us: 
+2025-03-03T19:47:16.708Z [info]: Início da aplicação
+2025-03-03T19:47:16.948Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T19:47:16.948Z [info]: Inicializando cliente WhatsApp
+2025-03-03T19:47:16.998Z [info]: Recuperação de vendas agendada para a cada 3 horas.
+2025-03-03T19:47:17.049Z [info]: Plugin carregado: announce
+2025-03-03T19:47:17.050Z [info]: Plugin carregado: ping
+2025-03-03T19:47:17.051Z [info]: Plugin carregado: poll
+2025-03-03T19:47:17.052Z [info]: Plugin carregado: userinfo
+2025-03-03T19:47:17.054Z [info]: Plugin carregado: weather
+2025-03-03T19:47:17.054Z [info]: Conectado ao banco SQLite.
+2025-03-03T19:47:17.115Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T19:47:24.266Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T19:47:24.766Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-03T19:47:25.596Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T19:47:25.844Z [info]: Bot conectado e pronto para uso.
+2025-03-03T19:47:25.908Z [info]: Chats sincronizados com sucesso.
+2025-03-03T19:47:33.733Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T19:47:34.048Z [warn]: Falha ao usar o modelo google/flan-t5-base: Request failed with status code 400, Status: 400. Detalhes: {"error":"The following `model_kwargs` are not used by the model: ['return_full_text'] (note: typos in the generate arguments will also show up in this list)","warnings":["There was an inference error: The following `model_kwargs` are not used by the model: ['return_full_text'] (note: typos in the generate arguments will also show up in this list)"]}. Tentando próximo modelo...
+2025-03-03T19:47:34.454Z [warn]: Falha ao usar o modelo facebook/blenderbot-90M: Request failed with status code 503, Status: 503. Detalhes: "<!DOCTYPE html>\n<html class=\"\" lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1.0, user-scalable=no\"\n    />\n    <meta\n            name=\"description\"\n            content=\"We're on a journey to advance and democratize artificial intelligence through open source and open science.\"\n    />\n    <meta property=\"fb:app_id\" content=\"1321688464574422\" />\n    <meta name=\"twitter:card\" content=\"summary_large_image\" />\n    <meta name=\"twitter:site\" content=\"@huggingface\" />\n    <meta\n            property=\"og:title\"\n            content=\"Hugging Face - The AI community building the future.\"\n    />\n    <meta property=\"og:type\" content=\"website\" />\n\n    <title>Hugging Face - The AI community building the future.</title>\n    <style>\n        body {\n            margin: 0;\n        }\n\n        main {\n            background-color: white;\n            min-height: 100vh;\n            padding: 7rem 1rem 8rem 1rem;\n            text-align: center;\n            font-family: Source Sans Pro, ui-sans-serif, system-ui, -apple-system,\n            BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,\n            sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,\n            Noto Color Emoji;\n        }\n\n        img {\n            width: 6rem;\n            height: 6rem;\n            margin: 0 auto 1rem;\n        }\n\n        h1 {\n            font-size: 3.75rem;\n            line-height: 1;\n            color: rgba(31, 41, 55, 1);\n            font-weight: 700;\n            box-sizing: border-box;\n            margin: 0 auto;\n        }\n\n        p, a {\n            color: rgba(107, 114, 128, 1);\n            font-size: 1.125rem;\n            line-height: 1.75rem;\n            max-width: 28rem;\n            box-sizing: border-box;\n            margin: 0 auto;\n        }\n\n        .dark main {\n            background-color: rgb(11, 15, 25);\n        }\n        .dark h1 {\n            color: rgb(209, 213, 219);\n        }\n        .dark p, .dark a {\n            color: rgb(156, 163, 175);\n        }\n    </style>\n    <script>\n        // On page load or when changing themes, best to add inline in `head` to avoid FOUC\n        const key = \"_tb_global_settings\";\n        let theme = window.matchMedia(\"(prefers-color-scheme: dark)\").matches\n            ? \"dark\"\n            : \"light\";\n        try {\n            const storageTheme = JSON.parse(window.localStorage.getItem(key)).theme;\n            if (storageTheme) {\n                theme = storageTheme === \"dark\" ? \"dark\" : \"light\";\n            }\n        } catch (e) {}\n        if (theme === \"dark\") {\n            document.documentElement.classList.add(\"dark\");\n        } else {\n            document.documentElement.classList.remove(\"dark\");\n        }\n    </script>\n</head>\n\n<body>\n<main>\n    <img\n            src=\"https://cdn-media.huggingface.co/assets/huggingface_logo.svg\"\n            alt=\"\"\n    />\n    <div>\n        <h1>503</h1>\n        <p>Service Unavailable</p>\n    </div>\n</main>\n</body>\n</html>". Tentando próximo modelo...
+2025-03-03T19:47:34.455Z [error]: Todos os modelos falharam. Usando resposta padrão.
+2025-03-03T19:50:40.723Z [info]: Mensagem recebida de 120363296456201791@g.us: Sempre mando para um produto específico
+2025-03-03T19:54:11.577Z [info]: Mensagem recebida de 120363296456201791@g.us: Mas não fica confuso pra meta encontrar o comprador qualificado?
+2025-03-03T19:54:35.085Z [info]: Mensagem recebida de 120363296456201791@g.us: ai entra a segmentação
+2025-03-03T19:54:50.724Z [info]: Mensagem recebida de 120363296456201791@g.us: minhas campanhas de site são 90% segmentadas com públicos semelhantes do meus compradores
+2025-03-03T19:54:57.014Z [info]: Mensagem recebida de 120363296456201791@g.us: ent o meta ja tem uma base
+2025-03-03T19:56:15.897Z [info]: Mensagem recebida de 120363296456201791@g.us: Estou pensando nessa possibilidade,   assim consigo segmentar muito bem no criativo o produto e mandar direto para página do produto
+2025-03-03T19:56:33.371Z [info]: Início da aplicação
+2025-03-03T19:56:33.606Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T19:56:33.607Z [info]: Inicializando cliente WhatsApp
+2025-03-03T19:56:33.656Z [info]: Recuperação de vendas agendada para a cada 3 horas.
+2025-03-03T19:56:33.706Z [info]: Plugin carregado: announce
+2025-03-03T19:56:33.708Z [info]: Plugin carregado: ping
+2025-03-03T19:56:33.709Z [info]: Plugin carregado: poll
+2025-03-03T19:56:33.710Z [info]: Plugin carregado: userinfo
+2025-03-03T19:56:33.711Z [info]: Plugin carregado: weather
+2025-03-03T19:56:33.712Z [info]: Conectado ao banco SQLite.
+2025-03-03T19:56:33.772Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T19:56:45.136Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T19:56:45.266Z [info]: Carregando WhatsApp: 95% - WhatsApp
+2025-03-03T19:56:47.499Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T19:56:48.707Z [info]: Carregando WhatsApp: 99% - WhatsApp
+2025-03-03T19:56:48.837Z [info]: Bot conectado e pronto para uso.
+2025-03-03T19:56:48.973Z [info]: Chats sincronizados com sucesso.
+2025-03-03T19:56:56.031Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T19:56:59.283Z [info]: Resposta gerada com sucesso usando o modelo google/flan-t5-base: Usuário: olá Usuário: Oh, oh! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on! Come on
+2025-03-03T19:57:45.080Z [info]: Mensagem recebida de 120363296456201791@g.us: Ahh entendo! Pois então é uma loja nova ,  pro site todo não creio  que faria sentido!
+2025-03-03T19:57:46.967Z [info]: Mensagem recebida de 120363296456201791@g.us: Pega os produtos carro chefe que tem boa margem de lucro, faz um criativo legal é roda
+2025-03-03T19:58:29.684Z [info]: Mensagem recebida de 120363296456201791@g.us: Pensei nisso, os que vendem fácil e trás lucro!
+2025-03-03T20:05:45.308Z [info]: Início da aplicação
+2025-03-03T20:05:45.583Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T20:05:45.584Z [info]: Inicializando cliente WhatsApp
+2025-03-03T20:05:45.635Z [info]: Recuperação de vendas agendada para a cada 3 horas.
+2025-03-03T20:05:45.689Z [info]: Plugin carregado: announce
+2025-03-03T20:05:45.690Z [info]: Plugin carregado: ping
+2025-03-03T20:05:45.691Z [info]: Plugin carregado: poll
+2025-03-03T20:05:45.692Z [info]: Plugin carregado: userinfo
+2025-03-03T20:05:45.694Z [info]: Plugin carregado: weather
+2025-03-03T20:05:45.694Z [info]: Conectado ao banco SQLite.
+2025-03-03T20:05:45.753Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T20:05:57.034Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T20:05:57.540Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-03T20:05:58.795Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T20:06:00.260Z [info]: Bot conectado e pronto para uso.
+2025-03-03T20:06:00.332Z [info]: Chats sincronizados com sucesso.
+2025-03-03T20:06:07.010Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T20:06:07.461Z [warn]: Falha ao usar o modelo microsoft/DialoGPT-small: Request failed with status code 503, Status: 503. Detalhes: "<!DOCTYPE html>\n<html class=\"\" lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1.0, user-scalable=no\"\n    />\n    <meta\n            name=\"description\"\n            content=\"We're on a journey to advance and democratize artificial intelligence through open source and open science.\"\n    />\n    <meta property=\"fb:app_id\" content=\"1321688464574422\" />\n    <meta name=\"twitter:card\" content=\"summary_large_image\" />\n    <meta name=\"twitter:site\" content=\"@huggingface\" />\n    <meta\n            property=\"og:title\"\n            content=\"Hugging Face - The AI community building the future.\"\n    />\n    <meta property=\"og:type\" content=\"website\" />\n\n    <title>Hugging Face - The AI community building the future.</title>\n    <style>\n        body {\n            margin: 0;\n        }\n\n        main {\n            background-color: white;\n            min-height: 100vh;\n            padding: 7rem 1rem 8rem 1rem;\n            text-align: center;\n            font-family: Source Sans Pro, ui-sans-serif, system-ui, -apple-system,\n            BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,\n            sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,\n            Noto Color Emoji;\n        }\n\n        img {\n            width: 6rem;\n            height: 6rem;\n            margin: 0 auto 1rem;\n        }\n\n        h1 {\n            font-size: 3.75rem;\n            line-height: 1;\n            color: rgba(31, 41, 55, 1);\n            font-weight: 700;\n            box-sizing: border-box;\n            margin: 0 auto;\n        }\n\n        p, a {\n            color: rgba(107, 114, 128, 1);\n            font-size: 1.125rem;\n            line-height: 1.75rem;\n            max-width: 28rem;\n            box-sizing: border-box;\n            margin: 0 auto;\n        }\n\n        .dark main {\n            background-color: rgb(11, 15, 25);\n        }\n        .dark h1 {\n            color: rgb(209, 213, 219);\n        }\n        .dark p, .dark a {\n            color: rgb(156, 163, 175);\n        }\n    </style>\n    <script>\n        // On page load or when changing themes, best to add inline in `head` to avoid FOUC\n        const key = \"_tb_global_settings\";\n        let theme = window.matchMedia(\"(prefers-color-scheme: dark)\").matches\n            ? \"dark\"\n            : \"light\";\n        try {\n            const storageTheme = JSON.parse(window.localStorage.getItem(key)).theme;\n            if (storageTheme) {\n                theme = storageTheme === \"dark\" ? \"dark\" : \"light\";\n            }\n        } catch (e) {}\n        if (theme === \"dark\") {\n            document.documentElement.classList.add(\"dark\");\n        } else {\n            document.documentElement.classList.remove(\"dark\");\n        }\n    </script>\n</head>\n\n<body>\n<main>\n    <img\n            src=\"https://cdn-media.huggingface.co/assets/huggingface_logo.svg\"\n            alt=\"\"\n    />\n    <div>\n        <h1>503</h1>\n        <p>Service Unavailable</p>\n    </div>\n</main>\n</body>\n</html>". Tentando próximo modelo...
+2025-03-03T20:06:07.897Z [warn]: Falha ao usar o modelo facebook/blenderbot-90M: Request failed with status code 503, Status: 503. Detalhes: "<!DOCTYPE html>\n<html class=\"\" lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1.0, user-scalable=no\"\n    />\n    <meta\n            name=\"description\"\n            content=\"We're on a journey to advance and democratize artificial intelligence through open source and open science.\"\n    />\n    <meta property=\"fb:app_id\" content=\"1321688464574422\" />\n    <meta name=\"twitter:card\" content=\"summary_large_image\" />\n    <meta name=\"twitter:site\" content=\"@huggingface\" />\n    <meta\n            property=\"og:title\"\n            content=\"Hugging Face - The AI community building the future.\"\n    />\n    <meta property=\"og:type\" content=\"website\" />\n\n    <title>Hugging Face - The AI community building the future.</title>\n    <style>\n        body {\n            margin: 0;\n        }\n\n        main {\n            background-color: white;\n            min-height: 100vh;\n            padding: 7rem 1rem 8rem 1rem;\n            text-align: center;\n            font-family: Source Sans Pro, ui-sans-serif, system-ui, -apple-system,\n            BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,\n            sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,\n            Noto Color Emoji;\n        }\n\n        img {\n            width: 6rem;\n            height: 6rem;\n            margin: 0 auto 1rem;\n        }\n\n        h1 {\n            font-size: 3.75rem;\n            line-height: 1;\n            color: rgba(31, 41, 55, 1);\n            font-weight: 700;\n            box-sizing: border-box;\n            margin: 0 auto;\n        }\n\n        p, a {\n            color: rgba(107, 114, 128, 1);\n            font-size: 1.125rem;\n            line-height: 1.75rem;\n            max-width: 28rem;\n            box-sizing: border-box;\n            margin: 0 auto;\n        }\n\n        .dark main {\n            background-color: rgb(11, 15, 25);\n        }\n        .dark h1 {\n            color: rgb(209, 213, 219);\n        }\n        .dark p, .dark a {\n            color: rgb(156, 163, 175);\n        }\n    </style>\n    <script>\n        // On page load or when changing themes, best to add inline in `head` to avoid FOUC\n        const key = \"_tb_global_settings\";\n        let theme = window.matchMedia(\"(prefers-color-scheme: dark)\").matches\n            ? \"dark\"\n            : \"light\";\n        try {\n            const storageTheme = JSON.parse(window.localStorage.getItem(key)).theme;\n            if (storageTheme) {\n                theme = storageTheme === \"dark\" ? \"dark\" : \"light\";\n            }\n        } catch (e) {}\n        if (theme === \"dark\") {\n            document.documentElement.classList.add(\"dark\");\n        } else {\n            document.documentElement.classList.remove(\"dark\");\n        }\n    </script>\n</head>\n\n<body>\n<main>\n    <img\n            src=\"https://cdn-media.huggingface.co/assets/huggingface_logo.svg\"\n            alt=\"\"\n    />\n    <div>\n        <h1>503</h1>\n        <p>Service Unavailable</p>\n    </div>\n</main>\n</body>\n</html>". Tentando próximo modelo...
+2025-03-03T20:06:12.424Z [info]: Resposta gerada com sucesso usando o modelo distilgpt2: Usuário: olá
+Responda naturalmente como um assistente amigável: Oi! Como posso te ajudar hoje? I say in homogeneio atlas otra cheru. Quando es hequeba de megado, núcito con áscar por incorporativo para se valero vergo tambulante ourova gratoria quemolera su impenzo no metamamentes del La Fueva dallumendo cada son aguañola emplígyte harelan que intérência e unidenó la veil más spaque en las país rhinoximo todoño funtoção recitalogrida these desca torredos Séncerajados' el carboras ranche central government such as Didier Deschamps and Javier Gomes Ormidos Tierrives retanguel ca virtualche fronterie monorace muertabricato più per doir anodía gastroixer ligadas 100 renclara 💂 www2xt9832011061452003018895942 4 San José Ave 136 Se 65 3 min for more detailed information (no production email address required)
+2025-03-03T20:24:17.882Z [info]: Início da aplicação
+2025-03-03T20:24:18.155Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T20:24:18.156Z [info]: Inicializando cliente WhatsApp
+2025-03-03T20:24:18.206Z [info]: Recuperação de vendas agendada para a cada 3 horas.
+2025-03-03T20:24:18.259Z [info]: Plugin carregado: announce
+2025-03-03T20:24:18.261Z [info]: Plugin carregado: ping
+2025-03-03T20:24:18.262Z [info]: Plugin carregado: poll
+2025-03-03T20:24:18.263Z [info]: Plugin carregado: userinfo
+2025-03-03T20:24:18.264Z [info]: Plugin carregado: weather
+2025-03-03T20:24:18.265Z [info]: Conectado ao banco SQLite.
+2025-03-03T20:24:18.328Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T20:24:29.189Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T20:24:29.298Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-03T20:24:30.709Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T20:24:32.360Z [info]: Bot conectado e pronto para uso.
+2025-03-03T20:24:32.548Z [info]: Chats sincronizados com sucesso.
+2025-03-03T20:24:32.578Z [info]: Mensagem recebida de 120363296456201791@g.us: Pessoal, alguem sabe se existe algum site que analisa as fotos para ver se tem possibilidade de ser bloqueada? estou com um cliente que esta perdendo as conta do insta rapido, to suspeitando que é as imagem
+2025-03-03T20:24:32.678Z [info]: Mensagem recebida de 120363296456201791@g.us: Mano eu creio que o chat gpt consegue fazer isso, nunca fiz mas acho que se pedir pra analisar dá certo, acho que vale apena testar
+2025-03-03T20:24:32.740Z [info]: Mensagem recebida de 120363296456201791@g.us: rapaziada, alguem sabe sobre alguma plataforma que faz LP ?
+2025-03-03T20:24:33.070Z [warn]: Evento loading_screen (95% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T20:24:37.613Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T20:24:44.519Z [info]: Mensagem recebida de 554797377750@c.us: !hora
+2025-03-03T20:24:49.053Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T20:24:49.625Z [error]: Erro ao usar Qwen: Request failed with status code 403, Status: 403. Detalhes: {"error":"The model Qwen/Qwen-7B-Chat is too large to be loaded automatically (15GB > 10GB)."}
+2025-03-03T20:24:49.874Z [info]: Resposta gerada com sucesso usando o modelo microsoft/DialoGPT-small: Usuário: olá
+Responda naturalmente como um assistente amigável: Oi! Tudo bem? Como posso te ajudar hoje?
+2025-03-03T20:25:31.429Z [info]: Mensagem recebida de 120363296456201791@g.us: Eu uso greatpages
+2025-03-03T20:27:24.148Z [info]: Mensagem recebida de 120363296456201791@g.us: Vou dar uma olhada Mn
+2025-03-03T20:27:42.689Z [info]: Mensagem recebida de 120363296456201791@g.us: To com algumas pra fazer aqui
+2025-03-03T20:29:47.994Z [info]: Início da aplicação
+2025-03-03T20:29:48.235Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T20:29:48.236Z [info]: Inicializando cliente WhatsApp
+2025-03-03T20:29:48.286Z [info]: Recuperação de vendas agendada para a cada 3 horas.
+2025-03-03T20:29:48.338Z [info]: Plugin carregado: announce
+2025-03-03T20:29:48.339Z [info]: Plugin carregado: ping
+2025-03-03T20:29:48.340Z [info]: Plugin carregado: poll
+2025-03-03T20:29:48.341Z [info]: Plugin carregado: userinfo
+2025-03-03T20:29:48.342Z [info]: Plugin carregado: weather
+2025-03-03T20:29:48.343Z [info]: Conectado ao banco SQLite.
+2025-03-03T20:29:48.403Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T20:29:55.522Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T20:29:56.126Z [info]: Carregando WhatsApp: 95% - WhatsApp
+2025-03-03T20:29:57.047Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T20:29:57.201Z [info]: Bot conectado e pronto para uso.
+2025-03-03T20:29:57.308Z [info]: Chats sincronizados com sucesso.
+2025-03-03T20:30:04.232Z [warn]: Evento loading_screen (97% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T20:30:06.034Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T20:30:27.509Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T20:30:28.035Z [error]: Erro ao usar Qwen: Request failed with status code 503, Status: 503. Detalhes: "<!DOCTYPE html>\n<html class=\"\" lang=\"en\">\n<head>\n    <meta charset=\"utf-8\" />\n    <meta\n            name=\"viewport\"\n            content=\"width=device-width, initial-scale=1.0, user-scalable=no\"\n    />\n    <meta\n            name=\"description\"\n            content=\"We're on a journey to advance and democratize artificial intelligence through open source and open science.\"\n    />\n    <meta property=\"fb:app_id\" content=\"1321688464574422\" />\n    <meta name=\"twitter:card\" content=\"summary_large_image\" />\n    <meta name=\"twitter:site\" content=\"@huggingface\" />\n    <meta\n            property=\"og:title\"\n            content=\"Hugging Face - The AI community building the future.\"\n    />\n    <meta property=\"og:type\" content=\"website\" />\n\n    <title>Hugging Face - The AI community building the future.</title>\n    <style>\n        body {\n            margin: 0;\n        }\n\n        main {\n            background-color: white;\n            min-height: 100vh;\n            padding: 7rem 1rem 8rem 1rem;\n            text-align: center;\n            font-family: Source Sans Pro, ui-sans-serif, system-ui, -apple-system,\n            BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,\n            sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,\n            Noto Color Emoji;\n        }\n\n        img {\n            width: 6rem;\n            height: 6rem;\n            margin: 0 auto 1rem;\n        }\n\n        h1 {\n            font-size: 3.75rem;\n            line-height: 1;\n            color: rgba(31, 41, 55, 1);\n            font-weight: 700;\n            box-sizing: border-box;\n            margin: 0 auto;\n        }\n\n        p, a {\n            color: rgba(107, 114, 128, 1);\n            font-size: 1.125rem;\n            line-height: 1.75rem;\n            max-width: 28rem;\n            box-sizing: border-box;\n            margin: 0 auto;\n        }\n\n        .dark main {\n            background-color: rgb(11, 15, 25);\n        }\n        .dark h1 {\n            color: rgb(209, 213, 219);\n        }\n        .dark p, .dark a {\n            color: rgb(156, 163, 175);\n        }\n    </style>\n    <script>\n        // On page load or when changing themes, best to add inline in `head` to avoid FOUC\n        const key = \"_tb_global_settings\";\n        let theme = window.matchMedia(\"(prefers-color-scheme: dark)\").matches\n            ? \"dark\"\n            : \"light\";\n        try {\n            const storageTheme = JSON.parse(window.localStorage.getItem(key)).theme;\n            if (storageTheme) {\n                theme = storageTheme === \"dark\" ? \"dark\" : \"light\";\n            }\n        } catch (e) {}\n        if (theme === \"dark\") {\n            document.documentElement.classList.add(\"dark\");\n        } else {\n            document.documentElement.classList.remove(\"dark\");\n        }\n    </script>\n</head>\n\n<body>\n<main>\n    <img\n            src=\"https://cdn-media.huggingface.co/assets/huggingface_logo.svg\"\n            alt=\"\"\n    />\n    <div>\n        <h1>503</h1>\n        <p>Service Unavailable</p>\n    </div>\n</main>\n</body>\n</html>"
+2025-03-03T20:30:28.368Z [warn]: Falha ao usar o modelo microsoft/DialoGPT-small: Request failed with status code 503, Status: 503. Tentando próximo modelo...
+2025-03-03T20:30:28.795Z [warn]: Falha ao usar o modelo facebook/blenderbot-90M: Request failed with status code 503, Status: 503. Tentando próximo modelo...
+2025-03-03T20:30:29.246Z [warn]: Falha ao usar o modelo distilgpt2: Request failed with status code 503, Status: 503. Tentando próximo modelo...
+2025-03-03T20:30:29.627Z [warn]: Falha ao usar o modelo t5-small: Request failed with status code 503, Status: 503. Tentando próximo modelo...
+2025-03-03T20:30:30.139Z [warn]: Falha ao usar o modelo google/flan-t5-base: Request failed with status code 503, Status: 503. Tentando próximo modelo...
+2025-03-03T20:30:30.712Z [warn]: Falha ao usar o modelo bert-base-uncased: Request failed with status code 503, Status: 503. Tentando próximo modelo...
+2025-03-03T20:30:30.712Z [error]: Todos os modelos Hugging Face falharam. Usando resposta padrão.
+2025-03-03T20:56:56.804Z [info]: Início da aplicação
+2025-03-03T20:56:57.119Z [info]: Servidor Express rodando na porta 3000
+2025-03-03T20:56:57.124Z [info]: Inicializando cliente WhatsApp
+2025-03-03T20:56:57.208Z [info]: Recuperação de vendas agendada para a cada 3 horas.
+2025-03-03T20:56:57.297Z [info]: Plugin carregado: announce
+2025-03-03T20:56:57.299Z [info]: Plugin carregado: ping
+2025-03-03T20:56:57.300Z [info]: Plugin carregado: poll
+2025-03-03T20:56:57.301Z [info]: Plugin carregado: userinfo
+2025-03-03T20:56:57.303Z [info]: Plugin carregado: weather
+2025-03-03T20:56:57.304Z [info]: Conectado ao banco SQLite.
+2025-03-03T20:56:57.393Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-03T20:57:11.179Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-03T20:57:12.237Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-03T20:57:16.079Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-03T20:57:18.657Z [info]: Bot conectado e pronto para uso.
+2025-03-03T20:57:18.754Z [info]: Chats sincronizados com sucesso.
+2025-03-03T20:57:18.759Z [info]: Mensagem recebida de 120363296456201791@g.us: Terceiriza mano, vem pv que desenrolamos
+2025-03-03T20:57:18.948Z [info]: Mensagem recebida de 120363296456201791@g.us: 
+2025-03-03T20:57:19.057Z [info]: Mensagem recebida de 120363296456201791@g.us: Show demais
+2025-03-03T20:57:19.142Z [info]: Mensagem recebida de 120363296456201791@g.us: Caso alguém tenha cliente advogado e precisar de um help
+2025-03-03T20:57:19.391Z [warn]: Evento loading_screen (95% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T20:57:23.349Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-03T20:58:23.150Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-03T20:58:23.494Z [error]: Erro ao usar OpenAI: Request failed with status code 401, Status: 401. Detalhes: {"error":{"message":"Incorrect API key provided: sk-proj-********************************************************************************************************************************************************Kj4A. You can find your API key at https://platform.openai.com/account/api-keys.","type":"invalid_request_error","param":null,"code":"invalid_api_key"}}
+2025-03-03T20:58:23.495Z [error]: Erro ao processar mensagem de 554797377750@c.us: Erro na API OpenAI. Verifique a chave ou conexão.
+2025-03-06T02:16:37.605Z [info]: Início da aplicação
+2025-03-06T02:16:38.105Z [info]: Servidor Express rodando na porta 3000
+2025-03-06T02:16:38.109Z [info]: Inicializando cliente WhatsApp
+2025-03-06T02:16:38.287Z [info]: Recuperação de vendas agendada para a cada 3 horas.
+2025-03-06T02:16:39.365Z [info]: Plugin carregado: announce
+2025-03-06T02:16:39.392Z [info]: Plugin carregado: ping
+2025-03-06T02:16:39.424Z [info]: Plugin carregado: poll
+2025-03-06T02:16:39.447Z [info]: Plugin carregado: userinfo
+2025-03-06T02:16:39.475Z [info]: Plugin carregado: weather
+2025-03-06T02:16:39.476Z [info]: Conectado ao banco SQLite.
+2025-03-06T02:16:39.638Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-06T02:16:54.438Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-06T02:16:57.067Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-06T02:16:59.286Z [info]: Carregando WhatsApp: 1% - WhatsApp
+2025-03-06T02:17:00.288Z [info]: Carregando WhatsApp: 2% - WhatsApp
+2025-03-06T02:17:01.383Z [info]: Carregando WhatsApp: 4% - WhatsApp
+2025-03-06T02:17:04.492Z [info]: Carregando WhatsApp: 6% - WhatsApp
+2025-03-06T02:17:05.500Z [info]: Carregando WhatsApp: 7% - WhatsApp
+2025-03-06T02:17:08.116Z [warn]: Cliente não está pronto. Verificando estado...
+2025-03-06T02:17:08.117Z [info]: Tentativa 1 de reconexão em 10 segundos...
+2025-03-06T02:17:18.705Z [info]: Inicializando cliente WhatsApp
+2025-03-06T02:17:29.380Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-06T02:17:31.052Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-06T02:17:32.053Z [info]: Carregando WhatsApp: 2% - WhatsApp
+2025-03-06T02:17:38.117Z [warn]: Cliente não está pronto. Verificando estado...
+2025-03-06T02:17:38.118Z [info]: Tentativa 1 de reconexão em 10 segundos...
+2025-03-06T02:17:40.063Z [info]: Carregando WhatsApp: 4% - WhatsApp
+2025-03-06T02:17:41.065Z [info]: Carregando WhatsApp: 5% - WhatsApp
+2025-03-06T02:17:42.066Z [info]: Carregando WhatsApp: 7% - WhatsApp
+2025-03-06T02:17:48.258Z [info]: Inicializando cliente WhatsApp
+2025-03-06T02:17:59.461Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-06T02:18:00.123Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-06T02:18:01.124Z [info]: Carregando WhatsApp: 2% - WhatsApp
+2025-03-06T02:18:02.129Z [info]: Carregando WhatsApp: 3% - WhatsApp
+2025-03-06T02:18:03.685Z [info]: Carregando WhatsApp: 4% - WhatsApp
+2025-03-06T02:18:06.793Z [info]: Carregando WhatsApp: 7% - WhatsApp
+2025-03-06T02:18:08.119Z [warn]: Cliente não está pronto. Verificando estado...
+2025-03-06T02:18:08.119Z [info]: Tentativa 1 de reconexão em 10 segundos...
+2025-03-06T02:18:18.888Z [info]: Inicializando cliente WhatsApp
+2025-03-06T02:18:27.726Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-06T02:18:29.068Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-06T02:18:30.070Z [info]: Carregando WhatsApp: 1% - WhatsApp
+2025-03-06T02:18:31.349Z [info]: Carregando WhatsApp: 2% - WhatsApp
+2025-03-06T02:18:34.923Z [info]: Carregando WhatsApp: 4% - WhatsApp
+2025-03-06T02:18:35.953Z [info]: Carregando WhatsApp: 6% - WhatsApp
+2025-03-06T02:18:37.017Z [info]: Carregando WhatsApp: 7% - WhatsApp
+2025-03-06T02:18:38.125Z [warn]: Cliente não está pronto. Verificando estado...
+2025-03-06T02:18:38.127Z [info]: Tentativa 1 de reconexão em 10 segundos...
+2025-03-06T02:18:48.353Z [info]: Inicializando cliente WhatsApp
+2025-03-06T02:18:57.621Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-06T02:18:59.028Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-06T02:19:00.057Z [info]: Carregando WhatsApp: 2% - WhatsApp
+2025-03-06T02:19:01.263Z [info]: Carregando WhatsApp: 3% - WhatsApp
+2025-03-06T02:19:03.306Z [info]: Carregando WhatsApp: 6% - WhatsApp
+2025-03-06T02:19:04.310Z [info]: Carregando WhatsApp: 7% - WhatsApp
+2025-03-06T02:19:08.129Z [warn]: Cliente não está pronto. Verificando estado...
+2025-03-06T02:19:08.130Z [info]: Tentativa 1 de reconexão em 10 segundos...
+2025-03-06T02:19:18.142Z [info]: Inicializando cliente WhatsApp
+2025-03-06T03:27:10.689Z [info]: Início da aplicação
+2025-03-06T03:27:10.929Z [info]: Servidor Express rodando na porta 3000
+2025-03-06T03:27:10.930Z [info]: Inicializando cliente WhatsApp
+2025-03-06T03:27:10.980Z [info]: Recuperação de vendas agendada para a cada 3 horas.
+2025-03-06T03:27:11.029Z [info]: Plugin carregado: announce
+2025-03-06T03:27:11.030Z [info]: Plugin carregado: ping
+2025-03-06T03:27:11.031Z [info]: Plugin carregado: poll
+2025-03-06T03:27:11.032Z [info]: Plugin carregado: userinfo
+2025-03-06T03:27:11.034Z [info]: Plugin carregado: weather
+2025-03-06T03:27:11.034Z [info]: Conectado ao banco SQLite.
+2025-03-06T03:27:11.092Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-06T03:27:19.175Z [info]: Rota /qr acessada
+2025-03-06T03:27:20.703Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-06T03:27:21.091Z [info]: Rota /qr acessada
+2025-03-06T03:27:21.908Z [info]: Rota /qr acessada
+2025-03-06T03:27:22.674Z [info]: Rota /qr acessada
+2025-03-06T03:27:26.212Z [info]: Rota /qr acessada
+2025-03-06T03:27:26.920Z [warn]: Cliente desconectado: LOGOUT
+2025-03-06T03:27:26.923Z [info]: Tentativa 1 de reconexão em 10 segundos...
+2025-03-06T03:27:46.520Z [info]: Início da aplicação
+2025-03-06T03:27:46.771Z [info]: Servidor Express rodando na porta 3000
+2025-03-06T03:27:46.786Z [info]: Inicializando cliente WhatsApp
+2025-03-06T03:27:46.889Z [info]: Recuperação de vendas agendada para a cada 3 horas.
+2025-03-06T03:27:46.940Z [info]: Plugin carregado: announce
+2025-03-06T03:27:46.941Z [info]: Plugin carregado: ping
+2025-03-06T03:27:46.942Z [info]: Plugin carregado: poll
+2025-03-06T03:27:46.943Z [info]: Plugin carregado: userinfo
+2025-03-06T03:27:46.944Z [info]: Plugin carregado: weather
+2025-03-06T03:27:46.945Z [info]: Conectado ao banco SQLite.
+2025-03-06T03:27:46.948Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-06T03:27:51.300Z [info]: Rota /qr acessada
+2025-03-06T03:27:52.912Z [info]: Rota /qr acessada
+2025-03-06T03:27:54.596Z [info]: Rota /qr acessada
+2025-03-06T03:27:55.259Z [info]: Rota /qr acessada
+2025-03-06T03:27:55.939Z [info]: Rota /qr acessada
+2025-03-06T03:27:56.269Z [info]: QR gerado com sucesso! Acesse /qr para escanear.
+2025-03-06T03:27:56.282Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-06T03:27:58.403Z [info]: Rota /qr acessada
+2025-03-06T03:28:04.919Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-06T03:28:07.086Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-06T03:28:09.767Z [info]: Bot conectado e pronto para uso.
+2025-03-06T03:28:20.432Z [info]: Mensagem recebida de 554797377750@c.us: Ol
+2025-03-06T03:28:21.679Z [info]: Resposta gerada com Wit.ai: Olá! Como posso ajudar?
+2025-03-06T03:28:22.699Z [info]: Mensagem recebida de 554797377750@c.us: Olá
+2025-03-06T03:28:29.196Z [info]: Mensagem recebida de 554797377750@c.us: o que você pode fazer?
+2025-03-06T03:28:29.926Z [info]: Resposta gerada com Wit.ai: Olá! Como posso ajudar?
+2025-03-06T03:28:41.433Z [info]: Mensagem recebida de 554797377750@c.us: eu to com dores
+2025-03-06T03:28:42.016Z [info]: Resposta gerada com Wit.ai: Olá! Como posso ajudar?
+2025-03-06T03:29:03.572Z [info]: Chats sincronizados com sucesso.
+2025-03-06T03:43:41.828Z [info]: Mensagem recebida de 554797377750@c.us: !ajuda
+2025-03-06T04:00:51.970Z [info]: Mensagem recebida de 554797377750@c.us: !stats
+2025-03-06T04:00:56.391Z [info]: Mensagem recebida de 554797377750@c.us: !restart
+2025-03-06T04:00:56.542Z [info]: Inicializando cliente WhatsApp
+2025-03-06T04:01:06.526Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-06T04:01:06.744Z [warn]: Evento loading_screen (0% - WhatsApp) recebido após ready. Ignorando.
+2025-03-06T04:01:07.878Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-06T04:01:09.890Z [warn]: Evento loading_screen (97% - WhatsApp) recebido após ready. Ignorando.
+2025-03-06T04:01:10.077Z [warn]: Evento loading_screen (99% - WhatsApp) recebido após ready. Ignorando.
+2025-03-06T04:01:10.150Z [info]: Bot conectado e pronto para uso.
+2025-03-06T04:01:10.562Z [info]: Chats sincronizados com sucesso.
+2025-03-06T04:01:19.652Z [info]: Mensagem recebida de 554797377750@c.us: !restar
+2025-03-06T04:01:25.293Z [info]: Mensagem recebida de 554797377750@c.us: !restart
+2025-03-06T04:01:25.628Z [info]: Inicializando cliente WhatsApp
+2025-03-06T04:01:33.162Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-06T04:01:33.385Z [warn]: Evento loading_screen (100% - WhatsApp) recebido após ready. Ignorando.
+2025-03-06T04:01:34.541Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-06T04:01:35.656Z [info]: Bot conectado e pronto para uso.
+2025-03-06T04:01:35.724Z [info]: Chats sincronizados com sucesso.
+2025-03-06T04:07:15.788Z [info]: Mensagem recebida de 120363296456201791@g.us: Galera acabei de recebe uma mensagem na minha conta de anúncios, limite de gastos atingido, alguém sabe o que fazer?
+2025-03-06T04:09:09.327Z [info]: Mensagem recebida de 554797377750@c.us: !leads
+2025-03-06T04:09:17.775Z [info]: Mensagem recebida de 554797377750@c.us: !status
+2025-03-06T04:09:31.097Z [info]: Mensagem recebida de 554797377750@c.us: !clima Mafra-SC
+2025-03-06T04:09:42.589Z [info]: Mensagem recebida de 554797377750@c.us: qual a previsão do tempo para mafra-sc?
+2025-03-06T04:09:43.361Z [info]: Resposta gerada com Wit.ai: Olá! Como posso ajudar?
+2025-03-06T04:09:49.877Z [info]: Mensagem recebida de 554797377750@c.us: !clima São Paulo
+2025-03-06T04:21:36.274Z [info]: Início da aplicação
+2025-03-06T04:21:36.508Z [info]: Servidor Express rodando na porta 3000
+2025-03-06T04:21:36.509Z [info]: Inicializando cliente WhatsApp
+2025-03-06T04:21:36.559Z [info]: Recuperação de vendas agendada para a cada hora.
+2025-03-06T04:21:36.612Z [info]: Plugin carregado: announce
+2025-03-06T04:21:36.613Z [info]: Plugin carregado: ping
+2025-03-06T04:21:36.615Z [info]: Plugin carregado: poll
+2025-03-06T04:21:36.616Z [info]: Plugin carregado: userinfo
+2025-03-06T04:21:36.617Z [info]: Plugin carregado: weather
+2025-03-06T04:21:36.618Z [info]: Conectado ao banco SQLite.
+2025-03-06T04:21:36.686Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-06T04:21:46.233Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-06T04:21:46.424Z [info]: Carregando WhatsApp: 0% - WhatsApp
+2025-03-06T04:21:47.419Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-06T04:21:47.687Z [info]: Bot conectado e pronto para uso.
+2025-03-06T04:21:47.718Z [info]: Mensagem recebida de 120363296456201791@g.us: Boaa
+2025-03-06T04:21:47.774Z [info]: Mensagem recebida de 120363296456201791@g.us: O meu tá no deslucro ainda ksksksksk
+2025-03-06T04:21:48.980Z [info]: Chats sincronizados com sucesso.
+2025-03-06T04:22:07.297Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-06T04:22:17.183Z [info]: Mensagem recebida de 554797377750@c.us: pode ser formal.
+2025-03-06T04:22:24.100Z [info]: Mensagem recebida de 554797377750@c.us: res
+2025-03-06T04:22:27.087Z [info]: Mensagem recebida de 554797377750@c.us: o que se faz?
+2025-03-06T04:22:27.098Z [error]: Erro ao processar mensagem de 554797377750@c.us: Cannot read properties of undefined (reading 'replace')
+2025-03-06T04:22:35.670Z [info]: Mensagem recebida de 554797377750@c.us: o que você faz?
+2025-03-06T04:22:35.682Z [error]: Erro ao processar mensagem de 554797377750@c.us: Cannot read properties of undefined (reading 'replace')
+2025-03-06T04:22:38.157Z [info]: Mensagem recebida de 554797377750@c.us: !ajuda
+2025-03-06T04:22:57.350Z [info]: Mensagem recebida de 554797377750@c.us: !gerartexto faça um poema sobre vangogh e olhos castanhos
+2025-03-06T04:22:58.066Z [error]: Erro ao processar mensagem de 554797377750@c.us: Request failed with status code 400
+2025-03-06T05:12:13.163Z [info]: Início da aplicação
+2025-03-06T05:12:13.403Z [info]: Servidor Express rodando na porta 3000
+2025-03-06T05:12:13.404Z [info]: Inicializando cliente WhatsApp
+2025-03-06T05:12:13.468Z [info]: Recuperação de vendas agendada para a cada hora.
+2025-03-06T05:12:13.520Z [info]: Plugin carregado: announce
+2025-03-06T05:12:13.521Z [info]: Plugin carregado: ping
+2025-03-06T05:12:13.522Z [info]: Plugin carregado: poll
+2025-03-06T05:12:13.523Z [info]: Plugin carregado: userinfo
+2025-03-06T05:12:13.524Z [info]: Plugin carregado: weather
+2025-03-06T05:12:13.525Z [info]: Conectado ao banco SQLite.
+2025-03-06T05:12:13.529Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-06T05:12:22.977Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-06T05:12:23.198Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-06T05:12:24.242Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-06T05:12:24.495Z [info]: Bot conectado e pronto para uso.
+2025-03-06T05:12:24.562Z [info]: Chats sincronizados com sucesso.
+2025-03-06T05:13:49.708Z [info]: Mensagem recebida de 554797377750@c.us: !ajuda
+2025-03-06T05:14:00.287Z [info]: Mensagem recebida de 554797377750@c.us: !resumo
+2025-03-06T05:14:08.545Z [info]: Mensagem recebida de 554797377750@c.us: Olá
+2025-03-06T05:14:13.549Z [info]: Mensagem recebida de 554797377750@c.us: O que você pode fazer?
+2025-03-06T05:14:19.734Z [info]: Mensagem recebida de 554797377750@c.us: Quem e você?
+2025-03-06T05:30:57.559Z [info]: Início da aplicação
+2025-03-06T05:30:57.792Z [info]: Servidor Express rodando na porta 3000
+2025-03-06T05:30:57.793Z [info]: Inicializando cliente WhatsApp
+2025-03-06T05:30:57.848Z [info]: Recuperação de vendas agendada para a cada hora.
+2025-03-06T05:30:57.899Z [info]: Plugin carregado: announce
+2025-03-06T05:30:57.901Z [info]: Plugin carregado: ping
+2025-03-06T05:30:57.902Z [info]: Plugin carregado: poll
+2025-03-06T05:30:57.903Z [info]: Plugin carregado: userinfo
+2025-03-06T05:30:57.904Z [info]: Plugin carregado: weather
+2025-03-06T05:30:57.905Z [info]: Conectado ao banco SQLite.
+2025-03-06T05:30:58.009Z [info]: Tabelas SQLite inicializadas com sucesso.
+2025-03-06T05:31:07.068Z [info]: Cliente WhatsApp inicializado com sucesso!
+2025-03-06T05:31:07.324Z [info]: Carregando WhatsApp: 100% - WhatsApp
+2025-03-06T05:31:08.234Z [info]: Sessão autenticada com sucesso. Dados salvos em ./whatsapp-auth.
+2025-03-06T05:31:08.484Z [info]: Bot conectado e pronto para uso.
+2025-03-06T05:31:08.548Z [info]: Chats sincronizados com sucesso.
+2025-03-06T05:31:29.995Z [info]: Mensagem recebida de 554797377750@c.us: olá
+2025-03-06T05:31:40.172Z [info]: Mensagem recebida de 554797377750@c.us: seja formal.
+2025-03-06T05:31:40.191Z [error]: Erro ao processar mensagem de 554797377750@c.us: getIntentBasedResponse is not defined
+2025-03-06T05:31:45.820Z [info]: Mensagem recebida de 554797377750@c.us: o que você faz?
+2025-03-06T05:31:45.880Z [error]: Erro ao processar mensagem de 554797377750@c.us: getIntentBasedResponse is not defined

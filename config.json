@@ -1,0 +1,18 @@
+{
+    "autoReply": true,
+    "reportTime": "0 0 * * *",
+    "weeklyReportTime": "0 0 * * 0",
+    "maxRetries": 5,
+    "rateLimitMs": 1000,
+    "apiTimeout": 15000,
+    "reconnectInterval": 10000,
+    "maxReconnectAttempts": "Infinity",
+    "cacheTTL": 86400000,
+    "cpuThreshold": 80,
+    "memoryThreshold": 80,
+    "commandsPerMinute": 10,
+    "adminNumber": "554797377750@c.us",
+    "maintenanceMessage": "⚠️ Manutenção programada em breve. Pode haver interrupções.",
+    "maintenanceTime": null,
+    "monitoredGroups": ["GGx81qcrRp33sFF6RLpuCd"]
+}

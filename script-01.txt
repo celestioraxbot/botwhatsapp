@@ -1,0 +1,1279 @@
+// index.js
+require('dotenv').config();
+const { Client, LocalAuth } = require('whatsapp-web.js');
+const express = require('express');
+const bodyParser = require('body-parser');
+const qrcode = require('qrcode');
+const sqlite3 = require('sqlite3').verbose();
+const fs = require('fs');
+const { createClient } = require('@deepgram/sdk');
+const vision = require('@google-cloud/vision');
+const PDFParser = require('pdf-parse');
+const schedule = require('node-schedule');
+const os = require('os');
+const winston = require('winston');
+const path = require('path');
+const axios = require('axios');
+
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.printf(({ timestamp, level, message }) => `${timestamp} [${level}]: ${message}`)
+    ),
+    transports: [
+        new winston.transports.File({ filename: 'logs/bot.log', maxsize: 5 * 1024 * 1024, maxFiles: 5, tailable: true }),
+        new winston.transports.Console()
+    ]
+});
+
+const metrics = require('./utils/metrics');
+
+logger.info('Início da aplicação');
+
+const app = express();
+app.use(bodyParser.json());
+
+const config = JSON.parse(fs.readFileSync('./config.json', 'utf-8') || '{}');
+const defaultConfig = {
+    autoReply: true,
+    reportTime: '0 0 * * *',
+    weeklyReportTime: '0 0 * * 0',
+    maxRetries: 5,
+    rateLimitMs: 1000,
+    apiTimeout: 15000,
+    reconnectInterval: 10000,
+    maxReconnectAttempts: Infinity,
+    cacheTTL: 24 * 60 * 60 * 1000,
+    cpuThreshold: 80,
+    memoryThreshold: 80,
+    commandsPerMinute: 10,
+    adminNumber: process.env.ADMIN_PHONE_NUMBER || 'SEU_NUMERO_ADMIN',
+    maintenanceMessage: '⚠️ Manutenção programada em breve. Pode haver interrupções.',
+    maintenanceTime: process.env.MAINTENANCE_TIME || null,
+    monitoredGroups: [process.env.GROUP_ID || 'GGx81qcrRp33sFF6RLpuCd'],
+    maxWitAITrainingPerHour: 10,
+    maxWitAICallsPerMinute: 5 // Limite de chamadas ao Wit.ai por minuto
+};
+Object.assign(config, defaultConfig, config);
+
+const TIMEZONE_OFFSET = process.env.TIMEZONE_OFFSET ? parseInt(process.env.TIMEZONE_OFFSET) : -3;
+
+const startTime = Date.now();
+const rateLimitMap = new Map();
+const conversationContext = new Map();
+const witAICallCount = { count: 0, lastReset: Date.now() };
+
+const plugins = {};
+const loadPlugins = async () => {
+    const pluginDir = path.join(__dirname, 'plugins');
+    const files = await fs.promises.readdir(pluginDir);
+    for (const file of files) {
+        if (file.endsWith('.js')) {
+            const pluginName = file.replace('.js', '');
+            plugins[pluginName] = require(path.join(pluginDir, file));
+            logger.info(`Plugin carregado: ${pluginName}`);
+        }
+    }
+};
+loadPlugins();
+
+const products = {
+    "Cérebro em Alta Performance": {
+        keywords: ["desempenho cerebral", "foco", "memória", "saúde mental", "cansaço mental", "produtividade", "mente saudável", "clareza mental", "concentração", "raciocínio", "fadiga mental", "esquecimento", "lentidão mental", "excesso de trabalho", "neblina mental", "dificuldade de foco", "saúde neuronal"],
+        questions: [
+            "Você já sentiu que sua mente tá mais lenta ou esquecendo coisas ultimamente?",
+            "O cansaço mental tá te atrapalhando no trabalho ou nos estudos?"
+        ],
+        campaignMessages: {
+            formal: "Com base no que você me disse, o *Cérebro em Alta Performance* pode transformar sua vida! Ele melhora a concentração, fortalece a memória e elimina o cansaço mental com técnicas simples e científicas. Quer dar esse passo? Clica aqui: [link]",
+            informal: "Pelo teu papo, o *Cérebro em Alta Performance* é perfeito pra ti, mano! Teu foco vai pro espaço (no bom sentido!), a memória fica tinindo e o cansaço mental vira passado. Clica aqui agora: [link]"
+        },
+        link: "https://renovacaocosmica.shop/23/crb-fnl",
+        description: "Um e-book revolucionário que revela os segredos para otimizar o funcionamento do cérebro e alcançar alta performance mental. Baseado em estudos científicos, oferece técnicas práticas para melhorar a saúde cerebral, aumentar a concentração, fortalecer a memória e promover clareza mental. Ideal para quem quer uma mente afiada e uma vida saudável."
+    },
+    "Corpo e Mente": {
+        keywords: ["equilíbrio emocional", "estresse", "saúde do corpo", "bem-estar", "saúde mental", "cansaço", "mente equilibrada", "recuperação emocional", "ansiedade", "tensão", "harmonia", "esgotamento", "nervosismo", "burnout", "dores", "exaustão"],
+        questions: [
+            "Você anda sentindo muito estresse ou um peso no corpo ultimamente?",
+            "Tá precisando de algo pra dar uma equilibrada na vida?"
+        ],
+        campaignMessages: {
+            formal: "Pelo que você contou, o *Corpo e Mente* é ideal pra você! Ele reduz o estresse, harmoniza corpo e mente e te deixa mais leve com métodos naturais. Quer experimentar? Clica aqui: [link]",
+            informal: "Com esse teu relato, o *Corpo e Mente* te salva, mano! Zera o estresse, deixa tudo em harmonia e te dá um gás novo. Corre pro link: [link]"
+        },
+        link: "https://renovacaocosmica.shop/23/crpint-fnl",
+        description: "Um guia completo para restaurar o equilíbrio físico e emocional com métodos naturais e eficazes. Combina práticas simples para reduzir o estresse, melhorar a saúde emocional e revitalizar o corpo, ideal para quem busca harmonia e bem-estar sem medicamentos."
+    },
+    "Saúde Imersiva": {
+        keywords: ["saúde tecnológica", "dispositivos vestíveis", "realidade aumentada", "monitoramento de saúde", "bem-estar", "tecnologia de saúde", "prevenção", "saúde moderna", "inovação", "saúde em tempo real"],
+        questions: [
+            "Você já pensou em monitorar sua saúde com tecnologia de ponta?",
+            "Quer ter o controle total do teu bem-estar na palma da mão?"
+        ],
+        campaignMessages: {
+            formal: "Com o que você me disse, o *Saúde Imersiva* é perfeito pra você! Monitore sua saúde em tempo real com dispositivos modernos e viva melhor. Clica aqui pra conhecer: [link]",
+            informal: "Pelo teu papo, o *Saúde Imersiva* é o teu lance! Te dá o controle da saúde com tech foda, mano. Clica aqui: [link]"
+        },
+        link: "https://renovacaocosmica.shop/23/fnl-imersiva",
+        description: "Um guia que explora o futuro da saúde com dispositivos vestíveis e realidade aumentada. Permite monitoramento em tempo real, personalização de metas de bem-estar e prevenção de doenças, trazendo a revolução tecnológica para o cuidado pessoal."
+    },
+    "Saúde do Amanhã": {
+        keywords: ["tecnologia de saúde", "diagnósticos precoces", "tratamentos personalizados", "saúde futura", "inovação médica", "prevenção de doenças", "saúde avançada", "monitoramento", "ciência da saúde"],
+        questions: [
+            "Já imaginou ter diagnósticos super precisos antes de qualquer problema aparecer?",
+            "Quer usar a tecnologia pra cuidar da tua saúde como nunca?"
+        ],
+        campaignMessages: {
+            formal: "Com base no que você falou, o *Saúde do Amanhã* é a solução pra você! Diagnósticos precisos e tratamentos personalizados com tecnologia de ponta. Clica aqui: [link]",
+            informal: "Pelo que tu disse, o *Saúde do Amanhã* é o teu futuro, mano! Diagnósticos certeiros e cuidados top com tech avançada. Clica aqui: [link]"
+        },
+        link: "https://renovacaocosmica.shop/23/fnl-saude",
+        description: "Um programa que apresenta tecnologias inovadoras para cuidar da saúde, como diagnósticos precoces e tratamentos personalizados. Ideal para quem quer estar à frente das tendências e usar a ciência a favor do bem-estar."
+    },
+    "Sono Profundo, Vida Renovada": {
+        keywords: ["sono profundo", "qualidade do sono", "noites mal dormidas", "cansaço diurno", "recuperação", "descanso", "energia", "regeneração", "insônia", "sono reparador"],
+        questions: [
+            "Você tem acordado cansado ou com dificuldade pra dormir?",
+            "Tá precisando de um sono que te deixe renovado?"
+        ],
+        campaignMessages: {
+            formal: "Com o que você me contou, o *Sono Profundo, Vida Renovada* é perfeito pra você! Melhore seu sono e sinta-se renovado com técnicas simples. Clica aqui: [link]",
+            informal: "Pelo teu papo, o *Sono Profundo* te salva, mano! Dorme bem pra caramba e acorda novo em folha. Clica aqui: [link]"
+        },
+        link: "https://renovacaocosmica.shop/23/sono-fnl",
+        description: "Um programa para alcançar um sono profundo e reparador, essencial para a recuperação física e mental. Inclui técnicas práticas para criar uma rotina de sono que melhora a energia e a saúde geral."
+    },
+    "Rosa Xantina": {
+        keywords: ["pele radiante", "saúde da pele", "linhas finas", "renovação celular", "melasma", "espinhas", "elasticidade", "sebo", "hidratação", "pele jovem", "dermatologia"],
+        questions: [
+            "Você já reparou em linhas finas ou manchas na pele que te incomodam?",
+            "Quer uma pele mais firme e bonita sem esforço?"
+        ],
+        campaignMessages: {
+            formal: "Com base no que você disse, o *Rosa Xantina* é ideal pra você! Reduz linhas finas, hidrata e deixa sua pele radiante. Clica aqui pra experimentar: [link]",
+            informal: "Pelo teu relato, o *Rosa Xantina* é o teu segredo, mano! Linhas finas somem e a pele fica top. Clica aqui: [link]"
+        },
+        link: "https://ev.braip.com/ref?pv=pro9y44w&af=afijp7y0qm",
+        description: "Um produto inovador com fórmula poderosa para uma pele radiante e saudável. Desenvolvido por especialistas, reduz linhas finas, minimiza manchas e melhora a elasticidade, oferecendo resultados visíveis desde as primeiras aplicações."
+    },
+    "Os Alongamentos Essenciais": {
+        keywords: ["flexibilidade", "tensões musculares", "postura", "relaxamento", "dores musculares", "alongamentos", "saúde física", "bem-estar", "rotina diária"],
+        questions: [
+            "Você sente o corpo travado ou com dores depois de um dia longo?",
+            "Quer melhorar tua postura e relaxar com algo simples?"
+        ],
+        campaignMessages: {
+            formal: "Com o que você me disse, os *Alongamentos Essenciais* são perfeitos pra você! Alivie tensões e ganhe flexibilidade em 15 minutos por dia. Clica aqui: [link]",
+            informal: "Pelo teu papo, os *Alongamentos Essenciais* te ajudam, mano! Tira a tensão e deixa o corpo leve em 15 minutinhos. Clica aqui: [link]"
+        },
+        link: "https://renovacaocosmica.shop/23/alg-fnl",
+        description: "Um guia com alongamentos simples para fazer em casa em apenas 15 minutos diários. Alivia tensões musculares, melhora a flexibilidade e promove relaxamento físico e mental."
+    },
+    "Renavidiol CBA": {
+        keywords: ["beleza da pele", "hidratação", "rugas", "pé de galinha", "bigode chinês", "firmeza", "brilho", "pele macia", "juventude", "canabinoides"],
+        questions: [
+            "Você já notou rugas ou quer uma pele mais firme e hidratada?",
+            "Tá afim de se sentir mais jovem com uma pele top?"
+        ],
+        campaignMessages: {
+            formal: "Com base no teu relato, o *Renavidiol CBA* é perfeito pra você! Hidrata na hora, reduz rugas e deixa a pele firme e brilhante. Clica aqui: [link]",
+            informal: "Pelo que tu falou, o *Renavidiol CBA* é o teu lance, mano! Pele hidratada, rugas fora e brilho total. Clica aqui: [link]"
+        },
+        link: "https://ev.braip.com/ref?pv=pro173dg&af=afimex7zn1",
+        description: "Um produto com tecnologia Canabinoid Active System™ que restaura a beleza da pele em poucas aplicações. Oferece hidratação instantânea, reduz rugas e devolve firmeza e brilho."
+    },
+    "Nervocure": {
+        keywords: ["dores crônicas", "neuropatia", "ciática", "formigamentos", "dormência", "queimação", "inflamação", "sistema nervoso", "alívio", "nervo ciático", "desconforto"],
+        questions: [
+            "Você tem sentido dores, formigamentos ou queimação que não passam?",
+            "Tá cansado de desconforto nas pernas ou nas mãos?"
+        ],
+        campaignMessages: {
+            formal: "Com o que você me contou, o *Nervocure* é ideal pra você! Alivia dores e regenera os nervos de forma natural e segura. Clica aqui: [link]",
+            informal: "Pelo teu papo, o *Nervocure* te livra das dores, mano! Acaba com formigamento e queimação rapidinho. Clica aqui: [link]"
+        },
+        link: "https://renovacaocosmica.shop/23/nervocuretic",
+        description: "Uma solução natural e segura para aliviar dores crônicas e desconfortos nervosos, como neuropatias e ciática. Regenera o sistema nervoso e melhora a qualidade de vida."
+    },
+    "100Queda (Trinoxidil Americano)": {
+        keywords: ["queda de cabelo", "folículos", "cabelo forte", "calvície", "trinoxidil", "restauração capilar", "estimuladores capilares", "autoestima", "cabelo ralo"],
+        questions: [
+            "Você tá preocupado com a queda de cabelo ou cabelo ralo?",
+            "Quer recuperar teus fios e ter cabelo forte de novo?"
+        ],
+        campaignMessages: {
+            formal: "Com base no que você disse, o *100Queda* é a solução pra você! Restaura até 2.000 fios por semana com tecnologia americana. Clica aqui: [link]",
+            informal: "Pelo teu relato, o *100Queda* te salva, mano! Para a queda e traz teu cabelo de volta com força. Clica aqui: [link]"
+        },
+        link: "https://ev.braip.com/ref?pv=pro4rxm7&af=afivpggv51",
+        description: "Um tratamento revolucionário que restaura até 2.000 fios de cabelo por semana. Com fórmula americana, paralisa a queda, revive folículos e fortalece os fios sem efeitos colaterais."
+    },
+    "HemoGotas": {
+        keywords: ["hemorroidas", "alívio rápido", "tecnologia americana", "desconforto", "saúde natural", "inflamação", "dor anal", "bem-estar"],
+        questions: [
+            "Você tá sofrendo com hemorroidas ou desconforto por aí?",
+            "Quer se livrar desse problema de vez e sem dor?"
+        ],
+        campaignMessages: {
+            formal: "Com o que você me disse, o *HemoGotas* é perfeito pra você! Alívio rápido e natural pras hemorroidas com tecnologia avançada. Clica aqui: [link]",
+            informal: "Pelo teu papo, o *HemoGotas* resolve teu rolê, mano! Acaba com as hemorroidas rapidinho e sem stress. Clica aqui: [link]"
+        },
+        link: "https://ev.braip.com/ref?pv=pror2eex&af=afilxjyn16",
+        description: "Um tratamento natural com tecnologia americana que combate hemorroidas de dentro para fora. Oferece alívio rápido e seguro, eliminando o desconforto e restaurando a qualidade de vida."
+    }
+};
+
+const db = new sqlite3.Database('./groupMessages.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
+    if (err) logger.error('Erro ao conectar ao SQLite:', err.message);
+    else logger.info('Conectado ao banco SQLite.');
+});
+
+(async () => {
+    try {
+        await Promise.all([
+            new Promise((resolve, reject) => db.run(`CREATE TABLE IF NOT EXISTS messages (id INTEGER PRIMARY KEY AUTOINCREMENT, groupId TEXT, date TEXT, message TEXT)`, (err) => err ? reject(err) : resolve())),
+            new Promise((resolve, reject) => db.run(`CREATE TABLE IF NOT EXISTS knowledge (id INTEGER PRIMARY KEY AUTOINCREMENT, userId TEXT, date TEXT, content TEXT)`, (err) => err ? reject(err) : resolve())),
+            new Promise((resolve, reject) => db.run(`CREATE TABLE IF NOT EXISTS leads (id INTEGER PRIMARY KEY AUTOINCREMENT, userId TEXT, date TEXT, message TEXT, followedUp INTEGER DEFAULT 0)`, (err) => err ? reject(err) : resolve())),
+            new Promise((resolve, reject) => db.run(`CREATE TABLE IF NOT EXISTS cache (id INTEGER PRIMARY KEY AUTOINCREMENT, prompt TEXT UNIQUE, response TEXT, date TEXT)`, (err) => err ? reject(err) : resolve())),
+            new Promise((resolve, reject) => db.run(`CREATE TABLE IF NOT EXISTS usage (id INTEGER PRIMARY KEY AUTOINCREMENT, userId TEXT, command TEXT, date TEXT)`, (err) => err ? reject(err) : resolve())),
+            new Promise((resolve, reject) => db.run(`CREATE TABLE IF NOT EXISTS connection_logs (id INTEGER PRIMARY KEY AUTOINCREMENT, event TEXT, timestamp TEXT, details TEXT)`, (err) => err ? reject(err) : resolve()))
+        ]);
+        logger.info('Tabelas SQLite inicializadas com sucesso.');
+    } catch (err) {
+        logger.error('Erro ao inicializar tabelas SQLite:', err.message);
+        process.exit(1);
+    }
+})();
+
+const deepgram = process.env.DEEPGRAM_API_KEY ? createClient(process.env.DEEPGRAM_API_KEY) : null;
+const visionClient = process.env.GOOGLE_VISION_API_KEY ? new vision.ImageAnnotatorClient({ key: process.env.GOOGLE_VISION_API_KEY }) : null;
+
+let qrCodeData = '';
+let initializationError = null;
+let client = null;
+let isClientReady = false;
+
+async function logConnectionEvent(event, details) {
+    const timestamp = new Date().toISOString();
+    return new Promise((resolve) => {
+        db.run('INSERT INTO connection_logs (event, timestamp, details) VALUES (?, ?, ?)', [event, timestamp, details], (err) => {
+            if (err) logger.error(`Erro ao logar evento de conexão: ${err.message}`);
+            resolve(!err);
+        });
+    });
+}
+
+function monitorResources() {
+    const cpuUsage = os.loadavg()[0] / os.cpus().length * 100;
+    const totalMem = os.totalmem();
+    const freeMem = os.freemem();
+    const usedMem = (totalMem - freeMem) / totalMem * 100;
+
+    if (cpuUsage > config.cpuThreshold || usedMem > config.memoryThreshold) {
+        const alertMessage = `🚨 Alerta de Recursos:\nCPU: ${cpuUsage.toFixed(2)}% (limite: ${config.cpuThreshold}%)\nMemória: ${usedMem.toFixed(2)}% (limite: ${config.memoryThreshold}%)`;
+        logger.warn(alertMessage);
+        if (config.adminNumber && client) client.sendMessage(config.adminNumber, alertMessage);
+    }
+}
+
+function scheduleDatabaseBackup() {
+    schedule.scheduleJob('0 2 * * *', async () => {
+        const backupPath = `./backup/groupMessages_${new Date().toISOString().split('T')[0]}.db`;
+        try {
+            await fs.promises.copyFile('./groupMessages.db', backupPath);
+            logger.info(`Backup criado com sucesso em ${backupPath}`);
+        } catch (err) {
+            logger.error(`Erro ao criar backup: ${err.message}`);
+        }
+    });
+}
+
+async function manualBackup() {
+    const backupPath = `./backup/groupMessages_manual_${new Date().toISOString().replace(/:/g, '-')}.db`;
+    try {
+        await fs.promises.copyFile('./groupMessages.db', backupPath);
+        logger.info(`Backup manual criado em ${backupPath}`);
+        return backupPath;
+    } catch (err) {
+        logger.error(`Erro ao criar backup manual: ${err.message}`);
+        throw err;
+    }
+}
+
+function scheduleMaintenanceNotification() {
+    if (!config.maintenanceTime) return;
+    schedule.scheduleJob(config.maintenanceTime, async () => {
+        try {
+            for (const groupId of config.monitoredGroups) {
+                await client.sendMessage(groupId, config.maintenanceMessage);
+            }
+            logger.info('Notificação de manutenção enviada para todos os grupos.');
+        } catch (error) {
+            logger.error(`Erro ao enviar notificação de manutenção: ${error.message}`);
+        }
+    });
+}
+
+function scheduleSalesRecovery() {
+    schedule.scheduleJob('0 */3 * * *', async () => {
+        const threeHoursAgo = new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString();
+        db.all('SELECT id, userId, message FROM leads WHERE followedUp = 0 AND date < ?', [threeHoursAgo], async (err, rows) => {
+            if (err) {
+                logger.error('Erro ao verificar leads para recuperação de vendas:', err.message);
+                return;
+            }
+            for (const row of rows) {
+                try {
+                    const campaign = identifyCampaign(row.message);
+                    const tone = detectTone(row.message);
+                    let recoveryMessage = campaign && products[campaign].campaignMessages
+                        ? products[campaign].campaignMessages[tone].replace('[link]', products[campaign].link)
+                        : `Oi de novo! Notei que você mencionou "${row.message}" há um tempo. Ainda tá precisando de ajuda com isso?`;
+                    const product = findRelevantProduct(row.message);
+                    if (product) recoveryMessage += `\n\nOlha só: ${product.description} Clique AGORA e resolve de vez: ${product.link}`;
+                    
+                    await client.sendMessage(row.userId, adjustTone(recoveryMessage, tone));
+                    await markLeadAsFollowedUp(row.id);
+                    logger.info(`Mensagem de recuperação de vendas enviada para ${row.userId}: ${recoveryMessage}`);
+                } catch (error) {
+                    logger.error(`Erro ao enviar recuperação de vendas para ${row.userId}: ${error.message}`, error.stack);
+                }
+            }
+        });
+    });
+    logger.info('Recuperação de vendas agendada para a cada 3 horas.');
+}
+
+const port = process.env.PORT || 3000;
+app.get('/', (req, res) => {
+    logger.info('Rota raiz acessada');
+    if (initializationError) res.status(500).send(`Erro ao iniciar o bot WhatsApp: ${initializationError.message}`);
+    else if (!isClientReady) res.status(200).send('Bot WhatsApp está iniciando ou reconectando...');
+    else res.status(200).send('Bot WhatsApp está ativo!');
+});
+
+app.get('/health', (req, res) => {
+    res.status(isClientReady ? 200 : 503).json({
+        status: isClientReady ? 'healthy' : 'unhealthy',
+        uptime: Math.floor((Date.now() - startTime) / 1000 / 60),
+        messageCount: metrics.getMessageCount(),
+        lastError: initializationError ? initializationError.message : null,
+        cpuUsage: (os.loadavg()[0] / os.cpus().length * 100).toFixed(2),
+        memoryUsage: ((os.totalmem() - os.freemem()) / os.totalmem() * 100).toFixed(2)
+    });
+});
+
+app.listen(port, () => {
+    logger.info(`Servidor Express rodando na porta ${port}`);
+    initializeWhatsAppClient();
+    schedule.scheduleJob('*/5 * * * *', monitorResources);
+    scheduleDatabaseBackup();
+    scheduleMaintenanceNotification();
+    scheduleSalesRecovery();
+});
+
+function initializeWhatsAppClient() {
+    logger.info('Inicializando cliente WhatsApp');
+    const isWindows = process.platform === 'win32';
+    const chromiumPath = isWindows ? null : (process.env.PUPPETEER_EXECUTABLE_PATH || '/usr/bin/chromium');
+
+    try {
+        client = new Client({
+            authStrategy: new LocalAuth({ dataPath: isWindows ? './whatsapp-auth' : '/data/whatsapp-auth' }),
+            puppeteer: {
+                headless: true,
+                executablePath: chromiumPath,
+                args: [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox',
+                    '--disable-dev-shm-usage',
+                    '--disable-accelerated-2d-canvas',
+                    '--no-first-run',
+                    '--no-zygote',
+                    '--disable-gpu',
+                    '--aggressive-cache-discard',
+                    '--disable-cache',
+                    '--disable-extensions',
+                    '--disable-background-networking'
+                ],
+                timeout: 120000,
+            },
+            webVersionCache: {
+                type: 'remote',
+                remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html'
+            }
+        });
+
+        setupClientEvents();
+        startClient();
+    } catch (err) {
+        logger.error('Erro ao criar instância do cliente WhatsApp:', err.message, err.stack);
+        initializationError = err;
+        scheduleReconnect();
+    }
+}
+
+async function getBotResponse(prompt, context) {
+    const userId = context.userId;
+    const tone = detectTone(prompt);
+    const history = context.history || [];
+    const sentiment = analyzeSentiment(prompt);
+
+    // Verificar cache primeiro
+    const cachedResponse = await getFromCache(prompt);
+    if (cachedResponse) {
+        logger.info(`Resposta recuperada do cache: ${cachedResponse}`);
+        return adjustTone(cachedResponse, tone);
+    }
+
+    // Consultar conhecimento existente
+    const knowledge = await getKnowledge(userId);
+    if (knowledge) {
+        const knowledgeLines = knowledge.split('\n');
+        for (const line of knowledgeLines) {
+            const [key, value] = line.split(':').map(s => s.trim().toLowerCase());
+            if (prompt.toLowerCase().includes(key)) {
+                const response = adjustTone(`Pelo que eu aprendi, ${value}. Isso te ajuda ou quer saber mais?`, tone);
+                await saveToCache(prompt, response);
+                return response;
+            }
+        }
+    }
+
+    // Respostas pré-definidas para saudações e perguntas comuns
+    const greetings = ["oi", "olá", "e aí", "opa", "bom dia", "boa tarde", "boa noite"];
+    if (greetings.some(g => prompt.toLowerCase().startsWith(g))) {
+        const lastMessage = history.length > 1 ? history[history.length - 2].content : '';
+        if (greetings.some(g => lastMessage.toLowerCase().includes(g))) {
+            return adjustTone("Oi de novo! Como posso te ajudar dessa vez?", tone);
+        }
+        return adjustTone("Oi, tudo bem? Como posso te ajudar hoje?", tone);
+    } else if (prompt.match(/^(o que você faz|o que você pode fazer|como você ajuda)$/i)) {
+        return adjustTone("Eu sou teu parceiro pra tudo! Posso te ajudar com saúde mental, dores, pele, cabelo, sono e muito mais. Só me diz o que tá rolando contigo ou pergunta qualquer coisa!", tone);
+    } else if (prompt.match(/^(tudo bem|como você tá|como você está)$/i)) {
+        return adjustTone("Tô de boa, valeu por perguntar! E tu, como tá se sentindo hoje?", tone);
+    } else if (prompt.match(/^(obrigado|valeu|agradeço)$/i)) {
+        return adjustTone("Por nada, fico feliz em ajudar! Tem mais alguma coisa que eu possa fazer por ti?", tone);
+    }
+
+    // Detectar produto relevante e seguir fluxo de vendas
+    const product = findRelevantProduct(prompt);
+    if (product && !context.product) {
+        context.product = product;
+        context.step = 1;
+        const response = adjustTone(`Parece que você tá precisando de uma mãozinha. ${product.questions[0]}`, tone);
+        await saveToCache(prompt, response);
+        return response;
+    } else if (context.product && context.step === 1) {
+        context.step = 2;
+        const response = adjustTone(`Entendi, parece que isso tá te afetando mesmo. ${context.product.questions[1]}`, tone);
+        await saveToCache(prompt, response);
+        return response;
+    } else if (context.product && context.step === 2) {
+        const response = adjustTone(context.product.campaignMessages[tone].replace('[link]', context.product.link) + `\n\n${context.product.description}`, tone);
+        await saveLead(userId, prompt);
+        context.step = 0;
+        context.product = null;
+        await saveToCache(prompt, response);
+        return response;
+    }
+
+    // Resposta contextual com base no histórico
+    if (history.length > 0) {
+        const lastUserMessage = history.find(msg => msg.role === 'user')?.content || '';
+        if (lastUserMessage && !prompt.match(/^(sim|não|talvez)$/i)) {
+            const response = adjustTone(`Sobre o que tu disse antes ("${lastUserMessage}"), como eu posso te ajudar mais com "${prompt}"?`, tone);
+            await saveToCache(prompt, response);
+            return response;
+        } else if (prompt.match(/^(sim|não|talvez)$/i)) {
+            const response = adjustTone(prompt === 'sim' ? "Beleza, então vamos resolver isso! O que mais tu quer saber?" : 
+                                       prompt === 'não' ? "Ok, sem problema. O que tá rolando contigo então?" : 
+                                       "Tá indeciso, hein? Me conta mais pra eu te dar uma luz!", tone);
+            await saveToCache(prompt, response);
+            return response;
+        }
+    }
+
+    // Usar Wit.ai para respostas criativas ou desconhecidas
+    if (process.env.WITAI_API_TOKEN && canCallWitAI()) {
+        try {
+            const inputText = history.length > 0 ? `${history.map(msg => `${msg.role === 'user' ? 'Você' : 'Eu'}: ${msg.content}`).join('\n')}\nVocê: ${prompt}` : prompt;
+            const response = await axios.get(
+                `https://api.wit.ai/message?v=20250305&q=${encodeURIComponent(inputText)}`,
+                { headers: { 'Authorization': `Bearer ${process.env.WITAI_API_TOKEN}` }, timeout: config.apiTimeout }
+            );
+            const intents = response.data.intents || [];
+            let result;
+            if (intents.length > 0) {
+                result = adjustTone(`Entendi que você quer falar sobre "${intents[0].name}". Me conta mais pra eu te ajudar direitinho!`, tone);
+            } else {
+                // Solicitar IA para gerar resposta criativa
+                result = await axios.post(
+                    'https://api.wit.ai/message?v=20250305',
+                    { q: `Gere uma resposta útil e natural em português para: "${inputText}"` },
+                    { headers: { 'Authorization': `Bearer ${process.env.WITAI_API_TOKEN}` } }
+                ).then(res => res.data.text || adjustTone("Hmm, não sei direito como te ajudar com isso ainda. Me explica mais ou me ensina algo sobre isso?", tone));
+            }
+            witAICallCount.count++;
+            await saveToCache(prompt, result);
+            if (canTrainWitAI()) await trainWitAI(inputText, intents[0]?.name || 'unknown');
+            logger.info(`Resposta gerada com Wit.ai: ${result}`);
+            return result;
+        } catch (error) {
+            logger.error(`Erro ao usar Wit.ai: ${error.message}`);
+        }
+    }
+
+    // Fallback final com tom humano
+    const fallbacks = [
+        "Hmm, não sei direito como te ajudar com isso. Me conta mais pra eu entender melhor?",
+        "Tô tentando te ajudar, mas fiquei perdido aqui. Pode explicar mais ou perguntar outra coisa?",
+        "Ops, não peguei essa ainda. Me dá mais detalhes que eu te ajudo direitinho!"
+    ];
+    const fallback = adjustTone(fallbacks[Math.floor(Math.random() * fallbacks.length)], tone);
+    await saveToCache(prompt, fallback);
+    return fallback;
+}
+
+async function trainWitAI(prompt, intentName) {
+    const now = Date.now();
+    if (now - witAICallCount.lastReset > 3600000) {
+        witAICallCount.count = 0;
+        witAICallCount.lastReset = now;
+    }
+    if (witAICallCount.count >= config.maxWitAITrainingPerHour) return;
+    try {
+        await axios.post(
+            'https://api.wit.ai/utterances?v=20250305',
+            [{ text: prompt, intent: intentName, entities: [], traits: [] }],
+            { headers: { 'Authorization': `Bearer ${process.env.WITAI_API_TOKEN}` } }
+        );
+        witAICallCount.count++;
+        logger.info(`Wit.ai treinado com "${prompt}" para intent "${intentName}"`);
+    } catch (error) {
+        logger.error(`Erro ao treinar Wit.ai: ${error.message}`);
+    }
+}
+
+function canTrainWitAI() {
+    const now = Date.now();
+    if (now - witAICallCount.lastReset > 3600000) {
+        witAICallCount.count = 0;
+        witAICallCount.lastReset = now;
+    }
+    return witAICallCount.count < config.maxWitAITrainingPerHour;
+}
+
+function canCallWitAI() {
+    const now = Date.now();
+    if (now - witAICallCount.lastReset > 60000) {
+        witAICallCount.count = 0;
+        witAICallCount.lastReset = now;
+    }
+    return witAICallCount.count < config.maxWitAICallsPerMinute;
+}
+
+function setupClientEvents() {
+    client.on('loading_screen', (percent, message) => {
+        if (isClientReady) return;
+        logger.info(`Carregando WhatsApp: ${percent}% - ${message}`);
+    });
+
+    client.on('qr', (qr) => {
+        qrCodeData = qr;
+        logger.info('QR gerado com sucesso! Acesse /qr para escanear.');
+        logConnectionEvent('qr_generated', 'Novo QR Code gerado');
+    });
+
+    client.on('authenticated', () => {
+        logger.info(`Sessão autenticada com sucesso. Dados salvos em ${process.platform === 'win32' ? './whatsapp-auth' : '/data/whatsapp-auth'}.`);
+        logConnectionEvent('authenticated', 'Sessão autenticada');
+    });
+
+    client.on('ready', async () => {
+        isClientReady = true;
+        logger.info('Bot conectado e pronto para uso.');
+        console.log('Bot conectado no Fly!');
+        logConnectionEvent('ready', 'Cliente conectado');
+        const reportNumber = process.env.REPORT_PHONE_NUMBER;
+        if (reportNumber) await client.sendMessage(reportNumber, 'Bot conectado no Fly! 🚀');
+        scheduleDailyReport();
+        scheduleWeeklyReport();
+        scheduleLeadFollowUps();
+        try {
+            await client.getChats();
+            logger.info('Chats sincronizados com sucesso.');
+        } catch (err) {
+            logger.error('Erro ao sincronizar chats:', err.message);
+        }
+    });
+
+    client.on('auth_failure', (message) => {
+        logger.error('Falha na autenticação:', message);
+        initializationError = new Error(`Falha na autenticação: ${message}`);
+        logConnectionEvent('auth_failure', message);
+        scheduleReconnect();
+    });
+
+    client.on('disconnected', (reason) => {
+        isClientReady = false;
+        logger.warn(`Cliente desconectado: ${reason}`);
+        logConnectionEvent('disconnected', `Motivo: ${reason}`);
+        scheduleReconnect();
+    });
+
+    client.on('change_state', (state) => {
+        logger.info(`Estado do cliente alterado: ${state}`);
+        logConnectionEvent('state_change', state);
+    });
+
+    client.on('message', async (message) => {
+        logger.info(`Mensagem recebida de ${message.from}: ${message.body}`);
+        try {
+            metrics.logMessage();
+            const userId = message.from;
+            const text = message.body.toLowerCase();
+            const lang = detectLanguage(text);
+            const sentiment = analyzeSentiment(text);
+            const isGroup = userId.endsWith('@g.us');
+
+            const now = Date.now();
+            const userRate = rateLimitMap.get(userId) || { count: 0, lastReset: now };
+            if (now - userRate.lastReset > 60000) {
+                userRate.count = 0;
+                userRate.lastReset = now;
+            }
+
+            if (text.startsWith('!')) {
+                if (userRate.count >= config.commandsPerMinute) {
+                    await client.sendMessage(userId, adjustTone('Calma aí, você tá indo rápido demais! Aguarde um minutinho! ⏳', detectTone(text)));
+                    return;
+                }
+                userRate.count++;
+                rateLimitMap.set(userId, userRate);
+                await handleCommand(text, message, lang, sentiment);
+            } else if (isGroup) {
+                logger.debug(`Mensagem ignorada em grupo ${userId}: ${text}`);
+                return;
+            } else if (message.hasMedia) {
+                await handleMediaMessage(message, lang);
+            } else if (config.autoReply) {
+                let context = conversationContext.get(userId) || { history: [], step: 0, product: null, userId };
+                context.history.push({ role: 'user', content: message.body });
+                if (context.history.length > 5) context.history.shift();
+
+                const response = await getBotResponse(message.body, context);
+                const finalResponse = await adjustResponseBasedOnSentiment(response, sentiment);
+                context.history.push({ role: 'assistant', content: finalResponse });
+                conversationContext.set(userId, context);
+
+                await client.sendMessage(userId, finalResponse);
+            }
+        } catch (error) {
+            logger.error(`Erro ao processar mensagem de ${message.from}: ${error.message}`, error.stack);
+            await client.sendMessage(message.from, adjustTone('Ops, deu um probleminha aqui! Tenta de novo, vai?', detectTone(message.body || '')));
+        }
+    });
+
+    app.get('/qr', async (req, res) => {
+        logger.info('Rota /qr acessada');
+        if (!qrCodeData) {
+            if (initializationError) return res.status(500).send(`Erro ao gerar o QR Code: ${initializationError.message}. Tentando reconectar...`);
+            return res.send('QR não gerado ainda. Aguarde ou reinicie o bot.');
+        }
+        try {
+            const qrImage = await qrcode.toDataURL(qrCodeData);
+            res.send(`<img src="${qrImage}" alt="Escaneie este QR Code com o WhatsApp" />`);
+        } catch (error) {
+            logger.error('Erro ao gerar imagem QR:', error.message, error.stack);
+            res.status(500).send('Erro ao gerar o QR Code. Tente novamente.');
+        }
+    });
+}
+
+function startClient() {
+    client.initialize()
+        .then(() => {
+            logger.info('Cliente WhatsApp inicializado com sucesso!');
+            initializationError = null;
+        })
+        .catch((err) => {
+            logger.error('Erro ao inicializar o cliente WhatsApp:', err.message, err.stack);
+            initializationError = err;
+            scheduleReconnect();
+        });
+}
+
+function scheduleReconnect() {
+    let attempts = 0;
+    const baseDelay = config.reconnectInterval;
+
+    const reconnect = () => {
+        if (attempts >= config.maxReconnectAttempts && config.maxReconnectAttempts !== Infinity) {
+            logger.error('Número máximo de tentativas de reconexão atingido. Encerrando processo.');
+            process.exit(1);
+        }
+
+        const delay = Math.min(baseDelay * Math.pow(2, attempts), 60000);
+        logger.info(`Tentativa ${attempts + 1} de reconexão em ${delay / 1000} segundos...`);
+        
+        setTimeout(() => {
+            if (!client) {
+                initializeWhatsAppClient();
+            } else {
+                client.destroy().then(() => {
+                    initializeWhatsAppClient();
+                }).catch((err) => {
+                    logger.error('Erro ao destruir cliente para reconexão:', err.message);
+                    initializeWhatsAppClient();
+                });
+            }
+        }, delay);
+
+        attempts++;
+    };
+
+    reconnect();
+}
+
+setInterval(() => {
+    if (!isClientReady && client) {
+        logger.warn('Cliente não está pronto. Verificando estado...');
+        scheduleReconnect();
+    }
+    logger.debug('Keep-alive: Mantendo o processo ativo...');
+}, 30000);
+
+async function saveGroupMessage(groupId, message) {
+    const date = new Date().toISOString().split('T')[0];
+    return new Promise((resolve, reject) => {
+        db.get('SELECT COUNT(*) as count FROM messages WHERE groupId = ? AND date = ?', [groupId, date], (err, row) => {
+            if (err) return reject(err);
+            if (row.count >= 1000) {
+                logger.warn(`Limite de mensagens atingido para o grupo ${groupId} na data ${date}.`);
+                return resolve(false);
+            }
+            db.run('INSERT INTO messages (groupId, date, message) VALUES (?, ?, ?)', [groupId, date, JSON.stringify(message)], (err) => {
+                if (err) reject(err);
+                else resolve(true);
+            });
+        });
+    });
+}
+
+async function saveKnowledge(userId, content) {
+    const date = new Date().toISOString().split('T')[0];
+    return new Promise((resolve, reject) => {
+        db.run('INSERT INTO knowledge (userId, date, content) VALUES (?, ?, ?)', [userId, date, content], (err) => {
+            if (err) reject(err);
+            else resolve(true);
+        });
+    });
+}
+
+async function getKnowledge(userId) {
+    return new Promise((resolve, reject) => {
+        db.all('SELECT content FROM knowledge WHERE userId = ?', [userId], (err, rows) => {
+            if (err) reject(err);
+            else resolve(rows.map(row => row.content).join('\n'));
+        });
+    });
+}
+
+async function saveLead(userId, message) {
+    const date = new Date().toISOString();
+    return new Promise((resolve, reject) => {
+        db.run('INSERT INTO leads (userId, date, message) VALUES (?, ?, ?)', [userId, date, message], (err) => {
+            if (err) reject(err);
+            else resolve(true);
+        });
+    });
+}
+
+async function getLeads(userId) {
+    return new Promise((resolve, reject) => {
+        db.all('SELECT date, message FROM leads WHERE userId = ?', [userId], (err, rows) => {
+            if (err) reject(err);
+            else resolve(rows.map(row => `${row.date}: ${row.message}`).join('\n'));
+        });
+    });
+}
+
+async function markLeadAsFollowedUp(leadId) {
+    return new Promise((resolve, reject) => {
+        db.run('UPDATE leads SET followedUp = 1 WHERE id = ?', [leadId], (err) => {
+            if (err) reject(err);
+            else resolve(true);
+        });
+    });
+}
+
+async function saveToCache(prompt, response) {
+    const date = new Date().toISOString();
+    return new Promise((resolve) => {
+        db.run('INSERT OR REPLACE INTO cache (prompt, response, date) VALUES (?, ?, ?)', [prompt, response, date], (err) => {
+            if (err) logger.warn(`Erro ao salvar no cache: ${err.message}`);
+            resolve(!err);
+        });
+    });
+}
+
+async function getFromCache(prompt) {
+    return new Promise((resolve) => {
+        db.get('SELECT response, date FROM cache WHERE prompt = ?', [prompt], (err, row) => {
+            if (err) logger.warn(`Erro ao buscar no cache: ${err.message}`);
+            if (row && (Date.now() - new Date(row.date).getTime()) < config.cacheTTL) resolve(row.response);
+            else resolve(null);
+        });
+    });
+}
+
+async function logUsage(userId, command) {
+    const date = new Date().toISOString();
+    return new Promise((resolve) => {
+        db.run('INSERT INTO usage (userId, command, date) VALUES (?, ?, ?)', [userId, command, date], (err) => {
+            if (err) logger.warn(`Erro ao logar uso: ${err.message}`);
+            resolve(!err);
+        });
+    });
+}
+
+function detectLanguage(text) {
+    const cachedLang = getFromCache(`lang:${text}`);
+    if (cachedLang) return cachedLang;
+
+    const ptKeywords = ['olá', 'bom', 'tudo', 'como', 'obrigado', 'por favor'];
+    const enKeywords = ['hello', 'good', 'how', 'thanks', 'please'];
+    const esKeywords = ['hola', 'bueno', 'cómo', 'gracias', 'por favor'];
+
+    const textLower = text.toLowerCase();
+    const ptScore = ptKeywords.filter(word => textLower.includes(word)).length;
+    const enScore = enKeywords.filter(word => textLower.includes(word)).length;
+    const esScore = esKeywords.filter(word => textLower.includes(word)).length;
+
+    let lang = ptScore > enScore && ptScore > esScore ? 'pt' : enScore > ptScore && enScore > esScore ? 'en' : esScore > ptScore && esScore > enScore ? 'es' : 'pt';
+    saveToCache(`lang:${text}`, lang);
+    return lang;
+}
+
+function analyzeSentiment(text) {
+    const cachedSentiment = getFromCache(`sentiment:${text}`);
+    if (cachedSentiment) return cachedSentiment;
+
+    const positiveWords = ['bom', 'ótimo', 'feliz', 'gostei', 'legal', 'maravilhoso', 'good', 'great', 'happy', 'like', 'awesome'];
+    const negativeWords = ['ruim', 'péssimo', 'triste', 'odio', 'problema', 'bad', 'terrible', 'sad', 'hate', 'issue', 'dor', 'dores'];
+
+    const textLower = text.toLowerCase();
+    const positiveScore = positiveWords.filter(word => textLower.includes(word)).length;
+    const negativeScore = negativeWords.filter(word => textLower.includes(word)).length;
+
+    let sentiment = positiveScore > negativeScore ? 'positivo' : negativeScore > positiveScore ? 'negativo' : 'neutro';
+    saveToCache(`sentiment:${text}`, sentiment);
+    return sentiment;
+}
+
+async function adjustResponseBasedOnSentiment(response, sentiment) {
+    if (sentiment === 'negativo') return `${response} Desculpe se algo tá te incomodando, como posso te ajudar com isso? 😔`;
+    if (sentiment === 'positivo') return `${response} Que bom ouvir isso! 😊`;
+    return response;
+}
+
+function detectTone(text) {
+    const formalWords = ["senhor", "por favor", "obrigado", "gostaria", "poderia"];
+    const informalWords = ["mano", "beleza", "fala aí", "tranquilo", "e aí"];
+    text = text.toLowerCase();
+    const formalScore = formalWords.filter(word => text.includes(word)).length;
+    const informalScore = informalWords.filter(word => text.includes(word)).length;
+    return formalScore > informalScore ? "formal" : informalScore > formalScore ? "informal" : "neutro";
+}
+
+function adjustTone(response, tone) {
+    if (tone === "formal") {
+        return response.replace(/mano/g, "senhor(a)").replace(/beleza/g, "ótimo").replace(/😎/g, "🙂").replace(/putz/g, "desculpe-me").replace(/tu/g, "você").replace(/tá/g, "está");
+    } else if (tone === "informal") {
+        return response.replace(/senhor(a)/g, "mano").replace(/ótimo/g, "beleza").replace(/🙂/g, "😎").replace(/desculpe-me/g, "putz").replace(/você/g, "tu").replace(/está/g, "tá");
+    }
+    return response;
+}
+
+function findRelevantProduct(text) {
+    const textLower = text.toLowerCase();
+    for (const [name, product] of Object.entries(products)) {
+        if (product.keywords && product.keywords.some(keyword => textLower.includes(keyword))) return { name, ...product };
+    }
+    return null;
+}
+
+function identifyCampaign(text) {
+    const textLower = text.toLowerCase();
+    for (const [name, product] of Object.entries(products)) {
+        if (product.keywords && product.keywords.some(keyword => textLower.includes(keyword))) return name;
+    }
+    return null;
+}
+
+function scheduleLeadFollowUps() {
+    schedule.scheduleJob('*/10 * * * *', async () => {
+        const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+        db.all('SELECT id, userId, message FROM leads WHERE followedUp = 0 AND date < ?', [oneHourAgo], async (err, rows) => {
+            if (err) {
+                logger.error('Erro ao verificar leads:', err.message);
+                return;
+            }
+            for (const row of rows) {
+                try {
+                    const campaign = identifyCampaign(row.message);
+                    const tone = detectTone(row.message);
+                    let followUpResponse = campaign && products[campaign].campaignMessages
+                        ? products[campaign].campaignMessages[tone].replace('[link]', products[campaign].link)
+                        : `Oi, tudo bem? Você falou sobre "${row.message}" há um tempinho. Ainda tá precisando de ajuda com isso?`;
+                    const product = findRelevantProduct(row.message);
+                    if (product) followUpResponse += `\n\n${product.description} Clica aqui pra resolver agora: ${product.link}`;
+                    await client.sendMessage(row.userId, adjustTone(followUpResponse, tone));
+                    await markLeadAsFollowedUp(row.id);
+                    logger.info(`Follow-up enviado para ${row.userId}: ${followUpResponse}`);
+                } catch (error) {
+                    logger.error(`Erro ao enviar follow-up para ${row.userId}: ${error.message}`, error.stack);
+                }
+            }
+        });
+    });
+}
+
+async function handleCommand(text, message, lang, sentiment) {
+    const [command, ...args] = text.slice(1).split(' ');
+    const prompt = args.join(' ');
+    const tone = detectTone(text);
+    metrics.logCommand();
+    await logUsage(message.from, command);
+
+    if (plugins[command]) {
+        try {
+            const pluginResponse = await plugins[command].execute(message, args, client);
+            await client.sendMessage(message.from, pluginResponse);
+            return;
+        } catch (error) {
+            logger.error(`Erro ao executar plugin ${command}: ${error.message}`);
+            await client.sendMessage(message.from, 'Erro ao executar o plugin.');
+            return;
+        }
+    }
+
+    switch (command.toLowerCase()) {
+        case 'ajuda':
+            await client.sendMessage(message.from, await showHelp());
+            break;
+        case 'cancelar':
+            await client.sendMessage(message.from, adjustTone('Beleza, cancelei! Como posso te ajudar agora? 🙂', tone));
+            break;
+        case 'gerartexto':
+            if (!prompt) {
+                await client.sendMessage(message.from, adjustTone('Fala mais, tipo: "!gerartexto Escreva um poema".', tone));
+                return;
+            }
+            const generatedText = process.env.WITAI_API_TOKEN && canCallWitAI() ? 
+                await axios.post('https://api.wit.ai/message?v=20250305', { q: `Escreva um texto sobre "${prompt}" em português` }, 
+                    { headers: { 'Authorization': `Bearer ${process.env.WITAI_API_TOKEN}` } }).then(res => res.data.text || `Aqui tá um texto simples sobre "${prompt}": Um conteúdo básico pra te ajudar!`) :
+                adjustTone(`Aqui tá um texto simples sobre "${prompt}": Um conteúdo básico pra te ajudar!`, tone);
+            witAICallCount.count++;
+            await saveToCache(text, generatedText);
+            await client.sendMessage(message.from, await adjustResponseBasedOnSentiment(generatedText, sentiment));
+            break;
+        case 'gerarimagem':
+            if (!prompt) {
+                await client.sendMessage(message.from, adjustTone('Me diz o que quer, tipo: "!gerarimagem Um gato astronauta".', tone));
+                return;
+            }
+            await client.sendMessage(message.from, adjustTone('Beleza, já vou gerar a imagem... 🖼️', tone));
+            const imageUrl = 'https://via.placeholder.com/150'; // Placeholder
+            await client.sendMessage(message.from, { media: imageUrl, caption: adjustTone('Aqui tá tua imagem! 🙂', tone) });
+            break;
+        case 'buscarx':
+            if (!prompt) {
+                await client.sendMessage(message.from, adjustTone('Fala o que quer buscar no X, tipo: "!buscarx tecnologia".', tone));
+                return;
+            }
+            const xResult = adjustTone(`Pesquisei no X sobre "${prompt}" e achei um resumo básico: Algo interessante tá rolando por lá!`, tone);
+            await client.sendMessage(message.from, await adjustResponseBasedOnSentiment(xResult, sentiment));
+            break;
+        case 'perfilx':
+            if (!prompt) {
+                await client.sendMessage(message.from, adjustTone('Me dá um usuário do X, tipo: "!perfilx elonmusk".', tone));
+                return;
+            }
+            const profileAnalysis = adjustTone(`Sobre o @${prompt}: Parece um perfil bem ativo e interessante!`, tone);
+            await client.sendMessage(message.from, await adjustResponseBasedOnSentiment(profileAnalysis, sentiment));
+            break;
+        case 'buscar':
+            if (!prompt) {
+                await client.sendMessage(message.from, adjustTone('Fala o que quer buscar, tipo: "!buscar IA".', tone));
+                return;
+            }
+            const searchResult = process.env.WITAI_API_TOKEN && canCallWitAI() ? 
+                await axios.post('https://api.wit.ai/message?v=20250305', { q: `Pesquise sobre "${prompt}" e me dê um resumo em português` }, 
+                    { headers: { 'Authorization': `Bearer ${process.env.WITAI_API_TOKEN}` } }).then(res => res.data.text || `Pesquisei "${prompt}" e achei: Um resumo básico pra te ajudar!`) :
+                adjustTone(`Pesquisei "${prompt}" e achei: Um resumo básico pra te ajudar!`, tone);
+            witAICallCount.count++;
+            await client.sendMessage(message.from, await adjustResponseBasedOnSentiment(searchResult, sentiment));
+            break;
+        case 'clima':
+            if (!prompt) {
+                await client.sendMessage(message.from, adjustTone('Me diz a cidade, tipo: "!clima São Paulo".', tone));
+                return;
+            }
+            const weather = adjustTone(`O clima em ${prompt} tá assim: Um dia básico com solzinho! 🌤️`, tone);
+            await client.sendMessage(message.from, await adjustResponseBasedOnSentiment(weather, sentiment));
+            break;
+        case 'traduzir':
+            if (!prompt) {
+                await client.sendMessage(message.from, adjustTone('Fala o texto, tipo: "!traduzir Olá pra inglês".', tone));
+                return;
+            }
+            const translatedText = process.env.WITAI_API_TOKEN && canCallWitAI() ? 
+                await axios.post('https://api.wit.ai/message?v=20250305', { q: `Traduza "${prompt}" para o inglês` }, 
+                    { headers: { 'Authorization': `Bearer ${process.env.WITAI_API_TOKEN}` } }).then(res => res.data.text || `Traduzi "${prompt}" pro inglês: Hi there!`) :
+                adjustTone(`Traduzi "${prompt}" pro inglês: Hi there!`, tone);
+            witAICallCount.count++;
+            await client.sendMessage(message.from, await adjustResponseBasedOnSentiment(translatedText, sentiment));
+            break;
+        case 'resumo':
+            const summary = await generateDailySummary(message.to);
+            await client.sendMessage(message.from, await adjustResponseBasedOnSentiment(`${summary} 📝`, sentiment));
+            break;
+        case 'status':
+            const uptime = Math.floor((Date.now() - startTime) / 1000 / 60);
+            await client.sendMessage(message.from, adjustTone(`Tô de boa há ${uptime} minutos. Mensagens: ${metrics.getMessageCount()}. Comandos: ${metrics.getCommandCount()}. Vendas: ${metrics.getTotalSales()}. 😊`, tone));
+            break;
+        case 'config':
+            if (!args.length) {
+                await client.sendMessage(message.from, `Configurações atuais: ${JSON.stringify(config, null, 2)}`);
+                return;
+            }
+            const [key, value] = args;
+            if (key in defaultConfig) {
+                config[key] = value === 'true' || value === 'false' ? value === 'true' : value;
+                await fs.promises.writeFile('./config.json', JSON.stringify(config, null, 2));
+                await client.sendMessage(message.from, adjustTone(`Configuração atualizada: ${key} = ${value} 👍`, tone));
+            } else {
+                await client.sendMessage(message.from, adjustTone('Essa configuração não existe. Dá uma olhada no !ajuda.', tone));
+            }
+            break;
+        case 'vendas':
+            await client.sendMessage(message.from, adjustTone(`Já peguei ${metrics.getTotalSales()} intenções de venda. Quer ver os leads? Usa !leads! 😊`, tone));
+            break;
+        case 'hora':
+            const now = new Date();
+            const localHours = (now.getUTCHours() + TIMEZONE_OFFSET + 24) % 24;
+            const minutes = now.getUTCMinutes().toString().padStart(2, '0');
+            let greeting = localHours >= 5 && localHours < 12 ? 'Bom dia' : localHours >= 12 && localHours < 18 ? 'Boa tarde' : 'Boa noite';
+            await client.sendMessage(message.from, adjustTone(`${greeting}! Aqui são ${localHours}:${minutes}. ⏰`, tone));
+            break;
+        case 'conhecimento':
+            if (!prompt) {
+                await client.sendMessage(message.from, adjustTone('Me ensina algo, tipo: "!conhecimento O melhor celular é o XPhone".', tone));
+                return;
+            }
+            await saveKnowledge(message.from, prompt);
+            await client.sendMessage(message.from, adjustTone(`Valeu! Registrei: "${prompt}". Pode mandar mais! 😊`, tone));
+            break;
+        case 'leads':
+            const leads = await getLeads(message.from);
+            await client.sendMessage(message.from, leads ? adjustTone(`Seus leads:\n${leads} 📋`, tone) : adjustTone('Ainda não tenho leads seus. Fala mais sobre o que te incomoda que eu te ajudo! 😉', tone));
+            break;
+        case 'restart':
+            if (message.from !== config.adminNumber) {
+                await client.sendMessage(message.from, adjustTone('Só o chefe pode reiniciar o bot, desculpa!', tone));
+                return;
+            }
+            await client.sendMessage(message.from, adjustTone('Tô reiniciando agora... Já volto! 🔄', tone));
+            client.destroy().then(() => initializeWhatsAppClient());
+            break;
+        case 'stats':
+            const stats = await generateStats();
+            await client.sendMessage(message.from, stats);
+            break;
+        case 'backup':
+            if (message.from !== config.adminNumber) {
+                await client.sendMessage(message.from, adjustTone('Só o administrador pode fazer backup, desculpa!', tone));
+                return;
+            }
+            const backupPath = await manualBackup();
+            await client.sendMessage(message.from, adjustTone(`Backup feito com sucesso em: ${backupPath} ✅`, tone));
+            break;
+        default:
+            await client.sendMessage(message.from, adjustTone('Não entendi esse comando. Dá uma olhada no !ajuda pra ver o que eu posso fazer!', tone));
+    }
+}
+
+async function handleMediaMessage(message, lang) {
+    const tone = detectTone(message.body || '');
+    if (message.type === 'audio' && deepgram) {
+        const transcription = await transcribeAudio(message);
+        await client.sendMessage(message.from, adjustTone(`Aqui tá a transcrição do teu áudio: ${transcription} 🎙️`, tone));
+    } else if (message.type === 'image' && visionClient) {
+        const analysis = await analyzeImageWithGoogleVision(message);
+        await client.sendMessage(message.from, adjustTone(`Olha o que achei na tua imagem: ${analysis} 🖼️`, tone));
+    } else if (message.type === 'document' && message.mimetype.includes('pdf')) {
+        const text = await extractTextFromPDF(message);
+        await client.sendMessage(message.from, adjustTone(`Texto do teu PDF: ${text.slice(0, 500)}... 📜`, tone));
+    } else {
+        await client.sendMessage(message.from, adjustTone('Recebi tua mídia! Por enquanto, só trabalho com áudio, imagens e PDFs. Manda um texto que eu te ajudo!', tone));
+    }
+}
+
+async function transcribeAudio(message) {
+    if (!deepgram) return 'Erro: Deepgram API não configurada. Manda um texto que eu te ajudo!';
+    try {
+        const media = await message.downloadMedia();
+        const audioBuffer = Buffer.from(media.data, 'base64');
+        const response = await deepgram.listen.prerecorded.transcribe(
+            { buffer: audioBuffer, mimetype: media.mimetype },
+            { punctuate: true, language: 'pt-BR' }
+        );
+        return response.results?.channels[0]?.alternatives[0]?.transcript || 'Não consegui transcrever, desculpa!';
+    } catch (error) {
+        logger.error(`Erro na transcrição com Deepgram: ${error.message}`, error.stack);
+        return 'Deu erro ao transcrever o áudio, tenta de novo?';
+    }
+}
+
+async function analyzeImageWithGoogleVision(message) {
+    if (!visionClient) return 'Erro: Google Vision API não configurada. Manda um texto que eu te ajudo!';
+    try {
+        const media = await message.downloadMedia();
+        const imageBuffer = Buffer.from(media.data, 'base64');
+        const [result] = await visionClient.labelDetection(imageBuffer);
+        const labels = result.labelAnnotations.map(label => label.description).join(', ');
+        return labels ? `Rótulos detectados: ${labels}` : 'Não achei nada na imagem, desculpa!';
+    } catch (error) {
+        logger.error(`Erro na análise de imagem com Google Vision: ${error.message}`, error.stack);
+        return 'Deu erro ao analisar a imagem, tenta outra?';
+    }
+}
+
+async function extractTextFromPDF(message) {
+    try {
+        const media = await message.downloadMedia();
+        const pdfBuffer = Buffer.from(media.data, 'base64');
+        const data = await PDFParser(pdfBuffer);
+        return data.text || 'Não consegui extrair texto do PDF, desculpa!';
+    } catch (error) {
+        logger.error(`Erro na extração de texto do PDF: ${error.message}`, error.stack);
+        return 'Deu erro ao pegar o texto do PDF, tenta outro?';
+    }
+}
+
+async function generateDailySummary(groupId) {
+    const date = new Date().toISOString().split('T')[0];
+    return new Promise((resolve) => {
+        db.all('SELECT message FROM messages WHERE groupId = ? AND date = ?', [groupId, date], (err, rows) => {
+            if (err) resolve('Deu erro ao gerar o resumo, desculpa!');
+            else if (rows.length === 0) resolve('Nenhuma mensagem hoje ainda.');
+            else resolve(`Resumo do dia ${date}:\n${rows.map(row => JSON.parse(row.message).body).join('\n').slice(0, 1000)}...`);
+        });
+    });
+}
+
+async function generateWeeklySummary() {
+    const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    return new Promise((resolve) => {
+        db.all('SELECT groupId, message, date FROM messages WHERE date >= ?', [oneWeekAgo], (err, rows) => {
+            if (err) resolve('Erro ao gerar o resumo semanal, desculpa!');
+            else if (rows.length === 0) resolve('Nenhuma mensagem na última semana.');
+            else {
+                const summaryByGroup = {};
+                rows.forEach(row => {
+                    if (!summaryByGroup[row.groupId]) summaryByGroup[row.groupId] = [];
+                    summaryByGroup[row.groupId].push(`${row.date}: ${JSON.parse(row.message).body}`);
+                });
+                let summaryText = 'Resumo Semanal:\n';
+                for (const [groupId, messages] of Object.entries(summaryByGroup)) {
+                    summaryText += `\nGrupo ${groupId}:\n${messages.join('\n').slice(0, 500)}...\n`;
+                }
+                resolve(summaryText);
+            }
+        });
+    });
+}
+
+async function generateStats() {
+    return new Promise((resolve) => {
+        db.all('SELECT userId, COUNT(*) as count FROM usage GROUP BY userId ORDER BY count DESC LIMIT 5', (err, rows) => {
+            if (err) resolve('Erro ao gerar estatísticas, desculpa!');
+            else {
+                const userStats = rows.map(row => `${row.userId}: ${row.count} comandos`).join('\n');
+                const totalCommands = rows.reduce((sum, row) => sum + row.count, 0);
+                resolve(`Estatísticas do Bot:\nUptime: ${Math.floor((Date.now() - startTime) / 1000 / 60)} minutos\nTotal de comandos: ${totalCommands}\nTop 5 usuários:\n${userStats}`);
+            }
+        });
+    });
+}
+
+function scheduleDailyReport() {
+    const reportNumber = process.env.REPORT_PHONE_NUMBER;
+    if (!reportNumber) return;
+    schedule.scheduleJob(config.reportTime, async () => {
+        try {
+            const date = new Date().toISOString().split('T')[0];
+            for (const groupId of config.monitoredGroups) {
+                const summary = await generateDailySummary(groupId);
+                await client.sendMessage(reportNumber, `Relatório diário ${date} pra ${groupId}:\n${summary}`);
+            }
+            logger.info('Relatório diário enviado.');
+        } catch (error) {
+            logger.error(`Erro ao enviar relatório diário: ${error.message}`, error.stack);
+        }
+    });
+}
+
+function scheduleWeeklyReport() {
+    const reportNumber = process.env.REPORT_PHONE_NUMBER;
+    if (!reportNumber) return;
+    schedule.scheduleJob(config.weeklyReportTime, async () => {
+        try {
+            const summary = await generateWeeklySummary();
+            await client.sendMessage(reportNumber, summary);
+            logger.info('Relatório semanal enviado.');
+        } catch (error) {
+            logger.error(`Erro ao enviar relatório semanal: ${error.message}`, error.stack);
+        }
+    });
+}
+
+async function showHelp() {
+    return `
+Oi, tudo bem? Aqui vai uma lista dos comandos que eu sei:
+!ajuda - Mostra essa lista aqui
+!cancelar - Cancela o que eu tava fazendo
+!gerartexto [texto] - Crio um texto pra você (ex.: "!gerartexto Escreva um poema")
+!gerarimagem [descrição] - Gero uma imagem do que você pedir
+!buscarx [termo] - Busco algo no X pra você
+!perfilx [usuário] - Analiso um perfil do X
+!buscar [termo] - Pesquiso algo pra você
+!clima [cidade] - Te conto o clima
+!traduzir [texto] - Traduzo pro inglês
+!resumo - Resumo do que rolou no grupo hoje
+!status - Te falo como eu tô
+!config [chave] [valor] - Mexo nas minhas configs (se eu deixar)
+!vendas - Mostro quantas vendas já registrei
+!hora - Te digo a hora certinho
+!conhecimento [texto] - Aprendo algo novo com você
+!leads - Te mostro os leads que peguei
+!restart - Reinicio (só o chefe pode usar)
+!stats - Estatísticas de como eu tô indo
+!backup - Faço um backup (só pro chefe)
+Ou só me fala o que tá te incomodando que eu te ajudo!
+    `;
+}
+
+module.exports = {
+    config,
+    setupClientEvents,
+    scheduleReconnect,
+    handleCommand,
+    handleMediaMessage,
+    findRelevantProduct,
+    detectTone,
+    adjustTone
+};
